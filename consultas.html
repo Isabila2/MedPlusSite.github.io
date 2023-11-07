@@ -55,7 +55,7 @@ button {
 
 #subTela {
 	position: absolute;
-	margin-top: 50%;
+	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background-color: #fff;
@@ -626,7 +626,7 @@ button {
       function gerarSintomasPaciente(nomePaciente) {
         var sintomas = obterSintomasDoPaciente(nomePaciente); // Substitua essa linha pela lógica de obtenção dos sintomas do paciente
 
-        var sintomasHTML = "<h3>Relatório: " + nomePaciente + "</h3><ul>";
+        var sintomasHTML = "<br><br><h3>Relatório: " + nomePaciente + "</h3><ul>";
         for (var i = 0; i < sintomas.length; i++) {
           sintomasHTML += "<li>" + sintomas[i] + "</li>";
         }
