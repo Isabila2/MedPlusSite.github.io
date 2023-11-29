@@ -161,8 +161,8 @@ app.get('/', (req, res) => {
 
 app.post('/login', (req, res) => {
     const { email, senha, } = req.body;
-    const query = 'SELECT * FROM usuarioss WHERE email = ? AND senha = SHA1(?)';
-    const nome = 'SELECT nome FROM usuarioss';
+    const query = 'SELECT * FROM usuarios WHERE email = ? AND senha = SHA1(?)';
+    const nome = 'SELECT nome FROM usuarios';
 
     db.query(query, [email, senha], (err, result) => {
         if (err) {
@@ -174,9 +174,22 @@ app.post('/login', (req, res) => {
                 // Usuário autenticado com sucesso
                 console.log('Login bem-sucedido de:', nome);
 
-                // Adicione a mensagem de sucesso e redirecionamento aqui
-                res.status(200).redirect(`/consultas`);
-    
+               switch (usuario.tipo) {
+                    case 'Paciente':
+                        res.status(200).redirect('/consultas');
+                        break;
+                    case 'Medico':
+                        res.status(200).redirect('/consultasmedi');
+                        break;
+                    case 'Administrador':
+                        res.status(200).redirect('/admin');
+                        break;
+                    default:
+                        res.status(401).send({
+                            success: false,
+                            message: 'Tipo de usuário desconhecido.'
+                        });
+                }
             } else {
                 // Usuário não encontrado ou credenciais incorretas
                 console.log('Login falhou para o email:', email, ' e senha:', senha);
