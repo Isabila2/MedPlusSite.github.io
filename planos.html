@@ -7,9 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Planos.css">
 </head>
-<style>
 
-</style>
 
 <body>
 
@@ -157,84 +155,7 @@ main {
 
 /*Fim tudo*/
 
-/*Header*/
 
-#foto2 {
-    margin-left: 10%;
-}
-
-.foto {
-    padding: 0px;
-    margin-top: 30px;
-    margin-bottom: 10px;
-}
-
-.topico {
-    padding: 0px;
-    margin-bottom: 0px;
-    display: flex;
-    align-items: center;
-}
-
-#foto2 {
-    margin-left: 28%;
-}
-
-#foto2:hover {
-    transform: scale(1.1);
-    transition: all 0.5s;
-}
-
-#botlogo {
-    margin-right: 15%;
-}
-
-.topico {
-    padding: 0px;
-    margin-bottom: 0px;
-}
-
-.logincerto {
-    align-content: center;
-}
-
-.botoes {
-    background-color: #93d0ff83;
-    border-radius: 40px;
-    border-color: #ffffff;
-    height: 50px;
-    width: 120px;
-    font-family: Mate SC;
-    font-size: larger;
-    margin-bottom: 10%;
-    margin-left: 5px;
-}
-
-.botoes:hover {
-    background-color: #93D1FF;
-    box-shadow: 5px 2px #4b93ca;
-    transform: scale(1.1);
-    transition: all 0.5s;
-}
-
-.botao {
-    width: 600px;
-    justify-content: space-between;
-    padding: 15px;
-    padding-left: 15px;
-    align-items: center;
-}
-
-header {
-    position: fixed;
-    top: 0;
-    background-color: #ffffff;
-    z-index: 1;
-    width: 100%;
-    height: 10%;
-}
-
-/*Fim header*/
 
 /*Corpo*/
 main {
@@ -901,18 +822,8 @@ main {
 
 
     <!--Header-->
-    <header>
-
-        <div class="topico">
-            <img src="images/logoespee.png" height="40%" width="300px" button id="botlogo" onclick="voltar()">
-            <a href="index.html"><button class="botoes">Home</button></a>
-            <a href="exame.html"><button class="botoes">Exames</button></a>
-            <a href="consultaspac.html"><button class="botoes">Consultas</button></a>
-            <a href="cirurgias.html"><button class="botoes">Cirurgias</button></a>
-            <a href="sobrenos.html"><button class="botoes">Sobre nós</button></a>
-            <img src="images/iconelogin.png" height="80px" width="80px" id="foto2" button id="botlogi"
-                onclick="OpenPopUp()">
-        </div>
+      <header>
+             <%- include('../partials/headergeral'); %>
     </header>
 
     <!--Fim header-->
