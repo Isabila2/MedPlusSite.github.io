@@ -1,139 +1,194 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="ptbr">
+  <title>Paciente - Med+</title>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro - Med+</title>
-    <link rel="stylesheet" href="forms.css">
+
+ 
+        <style>
+            body {
+                min-width: 320px;
+                min-height: 240px;
+                background-color: #f8f9fa;
+                margin: 0px auto;
+                padding: 0px auto;
+                border-radius: 5vw;
+                font-size: 24px;
+                /* height: 100vh; */
+            }
+
+            .login-container {
+                /* height: 50vh; */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-left: 0px;
+                margin-top: 10px;
+            }
+
+            .login-card:hover {
+                background-color: #c0c0bd;
+                opacity: 75%;
+            }
+
+            .login-card {
+               border: 1px solid #a8a8a9;
+                /* Cor ciano */
+                border-radius: 10px;
+                padding: 20px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                justify-content: center;
+            }
+
+            .login-fields {
+                justify-content: center;
+                margin-left: 30px;
+                font-size: 24px;
+            }
+
+        
+
+            input {
+                font-size: 28px;
+                border-radius: 10px;
+                border: 1px solid #a8a8a9;
+            }
+            
+            select {
+                font-size: 25px;
+                border-radius: 10px;
+            
+                border: 1px solid #a8a8a9;
+            }
+            
+            #tipo{
+             margin-left: -60px;
+            }
+
+            #entrar {
+                font-size: 22px;
+                font-family: 'Courier New', Courier, monospace;
+                background-color: #93D1FF;
+                border-radius: 40px;
+                border-color: #ffffff;
+                height: 50px;
+                width: 160px;
+                font-family: Mate SC;
+                margin-left: 190px;
+            }
+            
+             #entrar:hover {
+                background-color: #93D1FF;
+                box-shadow: 5px 2px #4b93ca;
+                transform: scale(1.1);
+                transition: all 0.5s;
+            }
+  
+            #logo {
+              width: 450px;
+              height: 180px;
+              margin-left: 90px;}
+              
+            #cadastrar {
+             background-color: #93D1FF;
+             border-radius: 40px;
+             border-color: #ffffff;
+             height: 50px;
+             width: 170px;
+             font-family: Mate SC;
+             font-size: 22px;
+             margin-top: 10px;
+             margin-left: 100px;
+             }
+             
+          
+
+        </style>
 </head>
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
 
-    .box {
-        background-color: rgb(255, 255, 255);
-        width: 330px;
-    }
+<body class="container">
 
-    fieldset {
-        border: 3px solid #ffffff;
-        height: 649px;
-    }
+    <header>
+             <%- include('../partials/header'); %>
+    </header>
 
-    #logo {
-        width: 380px;
-        height: 130px;
-        margin-left: 10px;
-    }
+    <main>
+        <div class="login-container">
+            <div class="login-card">
+               <img src="images/logo_removebg_preview_1.png" alt="" id="logo">
+                <form method="post" action="/register">
+                    <div class="login-fields">
+                    
+                        <div><label for="email" style="width: 30vw;">Usuário ou Email:</label></div>
+                        <div><input type="text" id="email" name="email" required style="width: 30vw;"></div>
+                    </div>
+                    <br>
+                    
+                     <div class="login-fields">
+                    
+                        <div><label for="nome" style="width: 30vw;">Nome:</label></div>
+                        <div><input type="text" id="nome" name="nome" required style="width: 30vw;"></div>
+                    </div>
+                    <br>
+                    
+                    <div class="login-fields">
+                        <div><label for="senha">Senha:</label><div>
+                        <div> <input type="password" id="senha" name="senha" required style="width: 30vw;"></div>
+                    <div class="login-fields">
+                    
+                    <br>
+                    <div class="login-fields">
+                    <div><label id ="tipo" for="tipo">Qual seu tipo de conta:</label><div>
+      <select id="tipo" name="tipo" style="width: 30vw;" required >
+    <option value="Paciente">Paciente</option>
+    <option value="Médico">Médico</option>
+    <option value="Administrador">Administrador</option>
+</select>
+</div>
+<br>
+                    <div class="login-fields"><button type="submit" id="cadastrar">Cadastrar</button></div>
+                </form>
+            </div>
+        </div>
+    </main>
 
+    <!-- O código a seguir utiliza as classes do BootStrap-->
+    <!-- <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3 style="text-align: center;">Login</h3>
 
-    #submit {
-        background-color: #93D1FF;
-        border-radius: 40px;
-        border-color: #ffffff;
-        height: 50px;
-        width: 160px;
-        font-family: Mate SC;
-        font-size: larger;
-        margin-left: 100px;
+                <form class="form-horizontal" action="/login" method="post">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="username">Usuário:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="username" name="username"
+                                placeholder="Digite seu nome de usuário">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="pwd">Senha:</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="Digite sua senha">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default">Entrar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> -->
 
+    <footer>
+       
+    </footer>
 
-    }
-
-
-    #submit:hover {
-        background-color: #93D1FF;
-        box-shadow: 5px 2px #4b93ca;
-        transform: scale(1.1);
-        transition: all 0.5s;
-
-    }
-
-    .crie {
-        text-align: center;
-        color: #93D1FF;
-        margin-top: 139px;
-    }
-
-    #email {
-        background-color: #eceeef;
-        width: 390px;
-        height: 30px;
-        border-radius: 10px;
-        border: 1px solid #a8a8a9;
-    }
-
-    #senha {
-        background-color: #eceeef;
-        width: 390px;
-        height: 30px;
-        border-radius: 10px;
-        border: 1px solid #a8a8a9;
-
-    }
-
-    #voltar {
-        margin-left: -50px;
-
-    }
-
-    #nome {
-        background-color: #eceeef;
-        width: 390px;
-        height: 30px;
-        border-radius: 10px;
-        border: 1px solid #a8a8a9;
-
-
-
-    }
-
-    #cpf {
-        background-color: #eceeef;
-        width: 390px;
-        height: 30px;
-        border-radius: 10px;
-        border: 1px solid #a8a8a9;
-    }
-
-    .jatem {
-        margin-left: 110px;
-    }
-
-    #data {
-        font-size: 16px;
-    }
-
-    #datanasc {
-        background-color: #eceeef;
-        width: 100px;
-        height: 20px;
-        border: 1px solid #a8a8a9;
-    }
-</style>
-
-<body>
-    <div class="box">
-
- <form method="POST" action="/register">
- <img src="images/logo_removebg_preview_1.png" alt="" id="logo">
-          <br>
-          <br>
-        <label for="username">Usuario ou Email:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-
-        <label for="password">Senha:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-
-        <!-- Outros campos de entrada, se necessário -->
-
-        <input type="submit" value="Cadastrar">
-    </form>
-    </div>
 </body>
 
 </html>
+
+
+
