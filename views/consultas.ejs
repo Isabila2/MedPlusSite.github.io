@@ -2,769 +2,121 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Consultas-MedPlus</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Consultas-MedPlus</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 
-<body>
-
   <header>
-        
-            <div class="topico">
-                <img src="images/logoespee.png" height="40%" width="300px" button id="botlogo" onclick="voltar()">
-                
-        
-<a href="/"><button class="botoes">Home</button></a>
-<a href="/exames.html"><button class="botoes">Exames</button></a>
-<a href="/cirurgia.html"><button class="botoes">Cirurgias</button></a>
-<a href="/planos.html"><button class="botoes">Planos</button></a>
-<img src="images/iconelogin.png" height="80px" width="80px" id="foto2" button id="botlogi" onclick="login()">
-</div>
-</header>
+             <%- include('../partials/headergeral'); %>
+    </header>
+<body>
+   
+    <div class="e975_213">
+        <span class="e975_215">CONHEÇA AS NOSSAS UNIDADES</span>
+        <div class="e975_216"></div>
+        <span class="e975_217">DR. Ricardo Emanuel Lombardi - Radiologista |<button class="b1" onclick="abrirSubTela()">Confirmar Consulta</button></span>
+        <div class="e975_218"></div>
+        <div class="e975_219"></div>
+        <div class="e975_220"></div>
+        <div class="e975_221"></div>
+        <div class="e975_222"></div>
+        <div class="e975_223"></div>
+        <div class="e975_224"></div>
+        <span class="e975_225">DR. Antônio Fagundes Da Conceição - Dermatologista |<button class="b1" onclick="abrirSubTela()">Confirmar Consulta</button></span>
+        <span class="e975_226">DR. Francisco Almeida Boulevar - Oftalmologista |<button class="b1" onclick="abrirSubTela()">Confirmar Consulta</button></span>
+        <span class "e975_227">DR. Olávio Augusto Mendes - Cardiologista |<button class="b1" onclick="abrirSubTela()">Confirmar Consulta</button></span>
+        <span class="e975_228">DR. Lucas Eduardo Rosa - Anestesiologista |<button class="b1" onclick="abrirSubTela()">Confirmar Consulta</button></span>
+        <span class="e975_229">DR. Fábio Henrique Novaes - Urologista |<button class="b1" onclick="abrirSubTela()">Confirmar Consulta</button></span>
+        <span class="e975_230">DR. Gilberto Oliveira Fares Da Silva - Ginecologista |<button class="b1" onclick="abrirSubTela()">Confirmar Consulta</button></span>
+        <span class="e975_232">DR. Roberto Oliveira Mantoan - Neurologista |<button class="b1" onclick="abrirSubTela()">Confirmar Consulta</button></span>
+        <span class="e975_240">2° Andar - Sala 06</span>
+        <span class="e975_241">1° Andar - Sala 05</span>
+        <span class="e975_242">2° Andar - Sala 01</span>
+        <span class="e975_243">1° Andar - Sala 06</span>
+        <span class="e975_244">1° Andar - Sala 03</span>
+        <span class="e975_245">1° Andar - Sala 04</span>
+        <span class="e975_246">2° Andar - Sala 02</span>
+        <span class="e975_247">2° Andar - Sala 03</span>
+    </div>
+
+    <form method="POST" action="/marcarConsulta">
+    <div id="subTela">
+<label for="nomepaciente">Insira Seu nome</label>
+<br>
+<input type="text" id="nomepaciente" name="nomepaciente">
+<br>
+        <label for="dataconsulta">Data:</label>
+<br>
+        <input type="date" id="dataconsulta" name="dataconsulta">
+
+      
+<br>
+
 <br>
 <br>
+        <label for="hora">Escolha uma opção:</label>
+        <input type="time" id="hora" name="hora" placeholder="Selecione o Horário">
 <br>
 <br>
+<label for="motivo">Insira o motivo</label>
+<input type="text" id="motivo" name="motivo" placeholder="Motivo">
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
-
-
-#foto2 {
-	margin-left: 0%;
-    
-
-}
-
-
-
-.foto {
-	padding: 0px;
-	margin-top: 30px;
-	margin-bottom: 10px;
-}
-
-.topico {
-	padding: 0px;
-	margin-bottom: 0px;
-  display: flex;
-  align-items: center;
-
-}
-
-    /* Inicio cabeçalho */
-    
-
-    #foto2 {
-      margin-left: 28%;
-        
-    
-    }
-    #foto2:hover{
-    
-      transform: scale(1.1);
-      transition: all 0.5s;
-  }
-    
-
-    #botlogo{
-      margin-right: 15%;
-    }
-
-    .topico {
-      padding: 0px;
-      margin-bottom: 0px;
-    }
-    
-
-
-
-   .logincerto{
-    align-content: center;
-   }
-    .botoes{
-        background-color: #93D1FF;
-        border-radius: 40px;
-        border-color: #ffffff;
-        height: 50px;
-        width: 120px;
-        font-family: Mate SC;
-        font-size: larger;
-        margin-bottom: 10%;
-        
-     
+<br>
+<br>
+<label for="medicos">Escolha uma opção:</label>
+        <select id="medicos" name="nomemedico">
+    <option value="Antônio Fagundes Da Conceição">Antônio Fagundes Da Conceição</option>
+    <option value="Francisco Almeida Boulevar">Francisco Almeida Boulevar</option>
+    <option value="Olávio Augusto Mendes">Olávio Augusto Mendes</option>
+    <option value="Roberto Oliveira Mantoan">Roberto Oliveira Mantoan</option>
+</select>
+<br>
+   <h4>Deseja marcar consulta?</h4>
+<br>
+        <label for="sim">Sim</label>
+        <input type="radio" id="sim" name="resposta" value="sim">
+        <label for="nao">Não</label>
+        <input type="radio" id="nao" name="resposta" value="nao">
+<br>
+<input type="submit" value="Confirmar">
+<br>
+<br>
        
-    }
-
-    .botoes:hover{
-      background-color: #93D1FF;
-      box-shadow: 5px 2px #4b93ca;
-      transform: scale(1.1);
-      transition: all 0.5s;
-  }
-    .botao{
-        width: 600px;
-        justify-content: space-between;
-        padding: 15px;
-        padding-left: 10px;
-        align-items: center;
-
-    }
-    
-    header{
-  position: fixed;
-  top:0;
-  background-color: #ffffff;
-  z-index: 1;
-  width: 100%;
-    height: 10%;
-    
-}
-/* Inicio Corpo */
-html {
-	height: 100%;
-	width: 100%;
-}
-
-.a1 {
-	padding: 10px 20px;
-	background-color: #2079b0;
-	color: #fff;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-
-}
-
-button {
-	padding: 10px 20px;
-	background-color: #2079b0;
-	color: #fff;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-}
-
-
-#subTela {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background-color: #fff;
-	padding: 30px;
-	width: 600px;
-	max-width: 90%;
-	border-radius: 8px;
-	box-shadow: 0 2px 6px #2079b0(0, 0, 0, 0.3);
-	text-align: left;
-	font-family: Inter;
-	background-color: #ffffff;
-	background-image: url(images/logo_removebg_preview_1.png);
-	background-repeat: no-repeat;
-	background-position: 50% 0%; 
-	border: 4px solid #2079b0;
-}
-
-.close {
-	margin-left: 535px;
-	margin-top: 160px;
-	position: absolute;
-	background-color: #7BC8FF;
-	border-radius: 20px;
-	color: black;
-
-}
-
-h3 {
-	text-align: center;
-}
-
-.e515_53 {
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	background-color: rgba(255, 255, 255, 0.7200000286102295);
-	width: 1920px;
-	height: 1080px;
-
-	position: absolute
-}
-
-.e515_126 {
-	color: rgba(255, 255, 255, 1);
-	width: 398px;
-	height: 41px;
-	position: absolute;
-	left: 24px;
-	top: 489px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 0;
-}
-
-.e515_55 {
-	color: rgba(0, 0, 0, 1);
-	width: 316px;
-	height: 24px;
-	position: absolute;
-	left: -1377px;
-	top: 263px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 20px;
-	letter-spacing: 0;
-}
-
-.e532_395 {
-	background-color: rgba(123.25000405311584, 199.6649980545044, 255, 1);
-	width: 1920px;
-	height: 66px;
-	position: absolute;
-	left: 0px;
-	top: 268px;
-}
-
-.e532_403 {
-	background-color: rgba(123.25000405311584, 199.6649980545044, 255, 1);
-	width: 1920px;
-	height: 66px;
-	position: absolute;
-	left: 0px;
-	top: 161px;
-}
-
-.e532_396 {
-	background-color: rgba(123.25000405311584, 199.6649980545044, 255, 1);
-	width: 1920px;
-	height: 66px;
-	position: absolute;
-	left: 0px;
-	top: 382px;
-}
-
-.e532_397 {
-	background-color: rgba(123.25000405311584, 199.6649980545044, 255, 1);
-	width: 1920px;
-	height: 66px;
-	position: absolute;
-	left: 0px;
-	top: 484px;
-}
-
-.e532_398 {
-	background-color: rgba(123.25000405311584, 199.6649980545044, 255, 1);
-	width: 1920px;
-	height: 66px;
-	position: absolute;
-	left: 0px;
-	top: 607px
-}
-
-.e532_399 {
-	background-color: rgba(123.25000405311584, 199.6649980545044, 255, 1);
-	width: 1920px;
-	height: 66px;
-	position: absolute;
-	left: 0px;
-	top: 730px;
-}
-
-.e532_400 {
-	background-color: rgba(123.25000405311584, 199.6649980545044, 255, 1);
-	width: 1920px;
-	height: 66px;
-	position: absolute;
-	left: 0px;
-	top: 840px
-}
-
-.e532_401 {
-	background-color: rgba(123.25000405311584, 199.6649980545044, 255, 1);
-	width: 1920px;
-	height: 66px;
-	position: absolute;
-	left: 0px;
-	top: 959px;
-}
-
-.e515_217 {
-	color: rgba(0, 0, 0, 1);
-	width: 376px;
-	height: 41px;
-	position: absolute;
-	left: 0px;
-	top: 800px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 0;
-}
-
-.e515_218 {
-	color: rgba(0, 0, 0, 1);
-	width: 308px;
-	height: 41px;
-	position: absolute;
-	top: 681px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 0;
-}
-
-.e515_221 {
-	color: rgba(0, 0, 0, 1);
-	width: 308px;
-	height: 41px;
-	position: absolute;
-	left: 0px;
-	top: 910px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 0;
-}
-
-.e515_222 {
-	color: rgba(0, 0, 0, 1);
-	width: 376px;
-	height: 41px;
-	position: absolute;
-	left: 0px;
-	top: 1033px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 0;
-}
-
-.e515_129 {
-	color: rgba(2.000000118277967, 86.00000247359276, 138.00000697374344, 1);
-	width: 387px;
-	height: 41px;
-	position: absolute;
-	left: 632px;
-	top: 174px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 6;
-}
-
-.e515_206 {
-	color: rgba(2.000000118277967, 86.00000247359276, 138.00000697374344, 1);
-	width: 387px;
-	height: 41px;
-	position: absolute;
-	left: 632px;
-	top: 280px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 6;
-}
-
-.e515_207 {
-	color: rgba(2.000000118277967, 86.00000247359276, 138.00000697374344, 1);
-	width: 387px;
-	height: 41px;
-	position: absolute;
-	left: 632px;
-	top: 391px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 6;
-}
-
-.e515_208 {
-	color: rgba(2.000000118277967, 86.00000247359276, 138.00000697374344, 1);
-	width: 387px;
-	height: 41px;
-	position: absolute;
-	left: 632px;
-	top: 495px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 6;
-}
-
-.e515_209 {
-	color: rgba(2.000000118277967, 86.00000247359276, 138.00000697374344, 1);
-	width: 387px;
-	height: 41px;
-	position: absolute;
-	left: 632px;
-	top: 617px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 6;
-}
-
-.e515_210 {
-	color: rgba(2.000000118277967, 86.00000247359276, 138.00000697374344, 1);
-	width: 387px;
-	height: 41px;
-	position: absolute;
-	left: 632px;
-	top: 738px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 6;
-}
-
-.e515_211 {
-	color: rgba(2.000000118277967, 86.00000247359276, 138.00000697374344, 1);
-	width: 387px;
-	height: 41px;
-	position: absolute;
-	left: 632px;
-	top: 847px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 6;
-}
-
-.e515_212 {
-	color: rgba(2.000000118277967, 86.00000247359276, 138.00000697374344, 1);
-	width: 387px;
-	height: 41px;
-	position: absolute;
-	left: 632px;
-	top: 966px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 6;
-}
-
-.e515_60 {
-	background-color: rgba(255, 255, 255, 0);
-	width: 137px;
-	height: 55px;
-	position: absolute;
-	left: 1176px;
-	top: 966px;
-}
-
-.e515_62 {
-	background-color: rgba(255, 255, 255, 0);
-	width: 61px;
-	height: 47px;
-	position: absolute;
-	left: 1173px;
-	top: 67px;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
-}
-
-.e515_70 {
-	background-color: rgba(255, 255, 255, 0);
-	width: 62px;
-	height: 56px;
-	position: absolute;
-	left: 1172px;
-	top: 64px;
-}
-
-.e515_77 {
-	background-color: rgba(255, 255, 255, 0);
-	width: 137px;
-	height: 55px;
-	position: absolute;
-	left: 1176px;
-	top: 966px;
-}
-
-.e515_79 {
-	background-color: rgba(255, 255, 255, 0);
-	width: 61px;
-	height: 47px;
-	position: absolute;
-	left: 1173px;
-	top: 67px;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
-}
-
-.e515_87 {
-	background-color: rgba(255, 255, 255, 0);
-	width: 62px;
-	height: 56px;
-	position: absolute;
-	left: 1172px;
-	top: 64px;
-}
-
-.e515_122 {
-	color: rgba(2.000000118277967, 86.00000247359276, 138.00000697374344, 1);
-	width: 499px;
-	height: 61px;
-	position: absolute;
-	left: 710px;
-	top: 0px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 50px;
-	letter-spacing: 0;
-}
-
-.e515_123 {
-	color: rgba(255, 255, 255, 1);
-	width: 1920px;
-	height: 41px;
-	position: absolute;
-	top: 170px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 0;
-}
-
-.e515_124 {
-	color: rgba(255, 255, 255, 1);
-	width: 1920px;
-	height: 41px;
-	position: absolute;
-	top: 280px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 0;
-}
-
-.e515_125 {
-	color: rgba(255, 255, 255, 1);
-	width: 1920px;
-	height: 41px;
-	position: absolute;
-	top: 391px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 0;
-}
-
-.e515_213 {
-	color: rgba(0, 0, 0, 1);
-	width: 1920px;
-	height: 41px;
-	position: absolute;
-	top: 236px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 0;
-}
-
-.e515_214 {
-	color: rgba(0, 0, 0, 1);
-	width: 1920px;
-	height: 41px;
-	position: absolute;
-	top: 339px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 0;
-}
-
-.e515_215 {
-	color: rgba(0, 0, 0, 1);
-	width: 1920px;
-	height: 41px;
-	position: absolute;
-	top: 450px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 0;
-}
-
-.e515_216 {
-	color: rgba(0, 0, 0, 1);
-	width: 1920px;
-	height: 41px;
-	position: absolute;
-	top: 557px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 0;
-}
-
-.e515_197 {
-	color: rgba(255, 255, 255, 1);
-	width: 1920px;
-	height: 41px;
-	position: absolute;
-	top: 498px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 0;
-}
-
-.e515_127 {
-	color: rgba(255, 255, 255, 1);
-	width: 1920px;
-	height: 41px;
-	position: absolute;
-	top: 621px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 0;
-}
-
-.e515_128 {
-	color: rgba(255, 255, 255, 1);
-	width: 1920px;
-	height: 41px;
-	position: absolute;
-	top: 741px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 0;
-}
-
-.e515_219 {
-	color: rgba(255, 255, 255, 1);
-	width: 1920px;
-	height: 41px;
-	position: absolute;
-	top: 973px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 0;
-}
-
-.e515_220 {
-	color: rgba(255, 255, 255, 1);
-	width: 1920px;
-	height: 41px;
-	position: absolute;
-	top: 854px;
-	font-family: Mate SC;
-	text-align: left;
-	font-size: 34px;
-	letter-spacing: 0;
-}
-
-</style>
-      <div class=e515_53></div>
-      <div class="e532_395"></div>
-      <div class="e532_403"></div>
-      <div class="e532_396"></div>
-      <div class="e532_397"></div>
-      <div class="e532_398"></div>
-      <div class="e532_399"></div>
-      <div class="e532_400"></div>
-      <div class="e532_401"></div>
-      <span class="e515_217">Dia 12/03/2023 - 11h 30m</span>
-      <span class="e515_218">Dia 12/03/2023 - 12h </span>
-      <span class="e515_221">Dia 12/03/2023 - 14h </span>
-      <span class="e515_222">Dia 12/03/2023 - 14h 40m </span>
+ <button type="button" onclick="fecharSubTela()">Voltar</button>
     </div>
+</form>
 
-    <div class="e515_60"></div>
-    <div class="e515_62"></div>
-    <div class="e515_70"></div>
-    <div class="e515_77"></div>
-    <div class="e515_79"></div>
-    <div class="e515_87"></div>
-    <span class="e515_123">Allice Texeira dos Santos <button class="a1"
-        onclick="abrirSubTela('Allice Texeira dos Santos')">Ver Relatório</button></span>
-    <span class="e515_124">Maria Clara Santana <button class="a1" onclick="abrirSubTela('Maria Clara Santana')">Ver
-        Relatório</button></span>
-    <span class="e515_125">Pedro Oliveira <button class="a1" onclick="abrirSubTela('Pedro Oliveira')">Ver
-        Relatório</button> </span>
-    <span class="e515_213">Dia 12/03/2023 - 9h</span>
-    <span class="e515_214">Dia 12/03/2023 - 9h 30m</span>
-    <span class="e515_215">Dia 12/03/2023 - 10h 20m</span>
-    <span class="e515_216">Dia 12/03/2023 - 11h</span>
-    <span class="e515_197">Sara Vitória Almeida dos Santos <button class="a1"
-        onclick="abrirSubTela('Sara Vitória Almeida dos Santos')">Ver Relatório</button></span>
-    <span class="e515_127">Matheus Diniz <button class="a1" onclick="abrirSubTela('Matheus Diniz')">Ver
-        Relatório</button> </span>
-    <span class="e515_128">Isabel Pinheiro Cariri <button class="a1"
-        onclick="abrirSubTela('Isabel Pinheiro Cariri')">Ver Relatório</button></span>
-    <span class="e515_219">Jonas Novaes Mendes <button class="a1" onclick="abrirSubTela('Jonas Novaes Mendes')">Ver
-        Relatório</button></span>
-    <span class="e515_220">Carlos Fares Boulevar <button class="a1" onclick="abrirSubTela('Carlos Fares Boulevar')">Ver
-        Relatório</button></span>
-    </div>
-
-    <div id="subTela" style="display: none;">
-      <button onclick="fecharSubTela()" class="close">Fechar</button>
-      <div id="sintomasPaciente"></div>
-    </div>
 
     <script>
-      function abrirSubTela(nomePaciente) {
-        document.getElementById("subTela").style.display = "block";
-        gerarSintomasPaciente(nomePaciente);
-      }
-
-      function fecharSubTela() {
-        document.getElementById("subTela").style.display = "none";
-      }
-
-      function gerarSintomasPaciente(nomePaciente) {
-        var sintomas = obterSintomasDoPaciente(nomePaciente); // Substitua essa linha pela lógica de obtenção dos sintomas do paciente
-
-        var sintomasHTML = "<br><br><h3>Relatório: " + nomePaciente + "</h3><ul>";
-        for (var i = 0; i < sintomas.length; i++) {
-          sintomasHTML += "<li>" + sintomas[i] + "</li>";
+        function abrirSubTela() {
+            document.getElementById("subTela").style.display = "block";
         }
-        sintomasHTML += "</ul>";
 
-        document.getElementById("sintomasPaciente").innerHTML = sintomasHTML;
-      }
-
-      // Função de exemplo para obtenção dos sintomas do paciente
-      function obterSintomasDoPaciente(nomePaciente) {
-        // Lógica para obter os sintomas do paciente com o nome fornecido
-        // Substitua essa função pela sua implementação real
-        if (nomePaciente === "Allice Texeira dos Santos") {
-          return ["Febre", "Dor de cabeça", "Tosse"];
-        } else if (nomePaciente === "Maria Clara Santana") {
-          return ["Dor abdominal", "Enjoo", "Vômitos"];
-        } else if (nomePaciente === "Pedro Oliveira") {
-          return ["Dor nas costas", "Dor nas articulações"];
-        } else if (nomePaciente === "Sara Vitória Almeida dos Santos") {
-          return ["Dor de garganta", "Congestão nasal", "Febre"];
-        } else if (nomePaciente === "Matheus Diniz") {
-          return ["Dor de cabeça", "Dor nos olhos", "Sensibilidade à luz"];
-        } else if (nomePaciente === "Isabel Pinheiro Cariri") {
-          return ["Dor abdominal", "Náuseas", "Diarreia"];
-        } else if (nomePaciente === "Jonas Novaes Mendes") {
-          return ["Falta de ar", "Dor no peito", "Cansaço"];
-        } else if (nomePaciente === "Carlos Fares Boulevar") {
-          return ["Dor de cabeça", "Tontura", "Visão turva"];
-        } else {
-          return []; // Retorna um array vazio se o paciente não for encontrado
+        function fecharSubTela() {
+            document.getElementById("subTela").style.display = "none";
         }
-      }
 
+        function verificarResposta() {
+            var resposta = document.querySelector('input[name="resposta"]:checked');
 
-  function login(){event.preventDefault();
-    window.location.href="/login";
-
-  }
+            if (resposta) {
+                if (resposta.value === "sim") {
+                    alert("Consulta confirmada!");
+                    fecharSubTela();
+                } else if (resposta.value === "nao") {
+                    alert("Consulta não confirmada.");
+                    fecharSubTela();
+                }
+            } else {
+                alert("Por favor, selecione 'Sim' ou 'Não'.");
+            }
+        }
     </script>
 </body>
+<style>
+
+</style>
 
 </html>

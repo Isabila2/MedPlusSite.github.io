@@ -65,6 +65,9 @@ res.render('consultas'); // Use o mecanismo de visualização que preferir
 });
   // Lógica para a rota "/consulta"
 
+app.get('/consultasmedi', (req, res) => {
+res.render('consultasmedi'); // Use o mecanismo de visualização que preferir
+});
 
 // Marcar Consultas - Removi uma função desnecessária
 app.post('/marcarConsulta', async (req, res) => {
