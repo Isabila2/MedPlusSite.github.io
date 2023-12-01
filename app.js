@@ -160,48 +160,43 @@ app.get('/', (req, res) => {
 
 
 app.post('/login', (req, res) => {
-    const { email, senha, } = req.body;
-    const query = 'SELECT * FROM usuarios WHERE email = ? AND senha = SHA1(?)';
-    const nome = 'SELECT nome FROM usuarios';
+    const { email, senha } = req.body;
+    const query = 'SELECT * FROM usuarioss WHERE email = ? AND senha = SHA1(?)';
+    const nome = 'SELECT nome FROM usuarioss';
+    const tipo = 'SELECT tipo FROM usuarioss';
 
-    db.query(query, [email, senha], (err, result) => {
-        if (err) {
-            console.error('Erro ao verificar o login:', err);
-            res.status(500).send('Erro ao verificar o login.');
-        } else {
-            
-            if (result.length > 0) {
-                // Usuário autenticado com sucesso
-                console.log('Login bem-sucedido de:', nome);
+    db.query(query, [email, senha, nome, tipo], (err, results) => {
+        if (results.length > 0) {
+           console.log('Login bem sucedido de: '+nome);
+            req.session.loggedin = true;
+            req.session.username = results[0].nome; // Assumindo que o nome está na coluna 'nome'
+           
 
-               switch (usuario.tipo) {
-                    case 'Paciente':
-                        res.status(200).redirect('/consultas');
-                        break;
-                    case 'Medico':
-                        res.status(200).redirect('/consultasmedi');
-                        break;
-                    case 'Administrador':
-                        res.status(200).redirect('/admin');
-                        break;
-                    default:
-                        res.status(401).send({
-                            success: false,
-                            message: 'Tipo de usuário desconhecido.'
-                        });
-                }
-            } else {
-                // Usuário não encontrado ou credenciais incorretas
-                console.log('Login falhou para o email:', email, ' e senha:', senha);
-                res.status(401).send({
-                    success: false,
-                    message: 'Credenciais incorretas. Tente novamente.'
-                });
+            switch (results[0].tipo) {
+                case 'Paciente':
+                    res.status(200).redirect('/consultas');
+                   
+                    break;
+                case 'Medico':
+                    res.status(200).redirect('/consultasmedico');
+                    break;
+                case 'Admin':
+                    res.status(200).redirect('/admin');
+                    break;
+                default:
+                    res.status(401).send({
+                        success: false,
+                        message: 'Tipo de usuário desconhecido.'
+                    });
             }
+        } else if (err) {
+            console.error('Erro ao verificar o login:', err);
+            res.send('Erro ao verificar o login.');
+        } else {
+            res.send('Credenciais inválidas');
         }
     });
 });
-
 
 // Rota para a página de login
 app.get('/login', (req, res) => {
