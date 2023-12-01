@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Consultas-MedPlus</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<style>
+
+/* Add these styles to your existing CSS file */
+.consultation-table {
+	width: 80%;
+	margin: 20px auto;
+	border-collapse: collapse;
+  }
+  
+  .consultation-table th, .consultation-table td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+  }
+  
+  .consultation-table th {
+	background-color: #2079b0;
+	color: white;
+  }
+  
+  /* Adicione essas regras ao seu arquivo CSS existente */
+.consultation-table {
+	width: 80%;
+	margin: 20px auto;
+	border-collapse: separate; /* Adiciona espaçamento entre células e linhas */
+	border-spacing: 10px; /* Define o espaçamento desejado */
+  }
+  
+  .consultation-table th,
+  .consultation-table td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+  }
+  
+  .consultation-table th {
+	background-color: #2079b0;
+	color: white;
+  }
+  
+  
+</style>
+<body>
+    <header>
+        <div class="topico">
+            <img src="images/logoespee.png" height="40%" width="300px" button="" id="botlogo" onclick="voltar()">
+            <a href="/index.ejs"><button class="botoes">Home</button></a>
+            <a href="/exames.html"><button class="botoes">Exames</button></a>
+            <a href="/consultas.ejs"><button class="botoes">Consultas</button></a>
+            <a href="/cirurgia.html"><button class="botoes">Cirurgias</button></a>
+            <a href="/planos.html"><button class="botoes">Planos</button></a>
+            <img src="images/Login.png" height="80px" width="80px" id="foto2" button="" onclick="login()">
+        </div>
+    </header>
+    <br>
+
+
+    <table class="consultation-table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Área</th>
+                <th>Andar</th>
+                <th>Sala</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>DR. Ricardo Emanuel Lombardi</td>
+                 <td>Radiologista</td>
+                 <td>2 Andar</td>   
+                  <td>Sala 10</td>
+            </tr>
+            <tr>
+                <td>DR. Antônio Fagundes Da Conceição</td>
+                 <td>Dermatologista</td>
+                 <td>1 Andar</td> 
+                  <td>Sala 13</td>
+                <tr>
+                <td>DR. Fábio Henrique Novaes</td>
+                 <td>Urologista</td>
+                 <td>1 Andar</td>   
+                  <td>Sala 2</td>
+            </tr>
+
+<tr>
+                <td>DR. Gilberto Oliveira Fares Da Silva</td>
+                 <td>Ginecologista</td>
+                 <td>1 Andar</td>   
+                  <td> Sala 8</td>
+            </tr>
+<tr>
+                <td>DR. Lucas Eduardo Rosa</td>
+                 <td>Anestesiologista</td>
+                 <td>2 Andar</td>   
+                  <td>Sala 5</td>
+            </tr>
+<tr>
+                <td>DR. Roberto Oliveira Mantoan</td>
+                 <td>Neurologista</td>
+                 <td>2 Andar</td>   
+                  <td>Sala 18</td>
+            </tr>
+<tr>
+                <td>DRa. Edna Carvalho dos Santos</td>
+                 <td>Pedriatria</td>
+                 <td>1 Andar</td>   
+                  <td>Sala 17</td>
+            </tr>
+<tr>
+                <td>DRa. Laura Maria Cardoso</td>
+                 <td>Oncologia</td>
+                 <td>2 Andar</td>   
+                  <td>Sala 17</td>
+            </tr>
+<tr>
+                <td>DR. Raul Marino Júnior</td>
+                 <td>Cirurgião Plastico</td>
+                 <td>2 Andar</td>   
+                  <td>Sala 3</td>
+            </tr>
+<tr>
+                <td>DRa. Milena Gonçalves Basso</td>
+                 <td>Psiquiatria</td>
+                 <td>2 Andar</td>   
+                  <td>Sala 10</td>
+            </tr>
+
+<tr>
+                <td>DR. José Osmar Medina de Abreu Pestana</td>
+                 <td>Dermatologista</td>
+                 <td>1 Andar</td>   
+                  <td>Sala 4</td>
+            </tr>
+
+<tr>
+                <td>DRa. Adriana de Oliveira Melo</td>
+                 <td>Nutricionista</td>
+                 <td>2 Andar</td>   
+                  <td>Sala 8</td>
+            </tr>
+<tr>
+                <td>DR. Veríssimo Gomes</td>
+                 <td>Cirurgião Geral</td>
+                 <td>2 Andar</td>   
+                  <td>Sala 20</td>
+            </tr>
+<tr>
+                <td>DR. Oswaldo Cruz</td>
+                 <td>Fisioterapia</td>
+                 <td>1 Andar</td>   
+                  <td>Sala 6</td>
+            </tr>
+      <button type="button" class="b1" id="confirmarConsultaBtn">Marcar Consulta</button>
+
+    <form method="POST" action="/marcarConsulta">
+        <div id="subTela" style="display: none;">
+            <label for="nomepaciente">Insira Seu nome</label>
+            <br>
+            <input type="text" id="nomepaciente" name="nomepaciente">
+            <br>
+            <label for="dataconsulta">Data:</label>
+            <br>
+            <input type="date" id="dataconsulta" name="dataconsulta">
+            <br>
+            <br>
+            <label for="hora">Escolha uma opção:</label>
+            <input type="time" id="hora" name="hora" placeholder="Selecione o Horário">
+            <br>
+            <br>
+            <label for="motivo">Insira o motivo</label>
+            <input type="text" id="motivo" name="motivo" placeholder="Motivo">
+            <br>
+            <br>
+            <label for="medicos">Escolha uma opção:</label>
+            <select id="medicos" name="nomemedico">
+                <option value="Antônio Fagundes Da Conceição">Antônio Fagundes Da Conceição</option>
+                <option value="Francisco Almeida Boulevar">Francisco Almeida Boulevar</option>
+                <option value="Olávio Augusto Mendes">Olávio Augusto Mendes</option>
+                <option value="Roberto Oliveira Mantoan">Roberto Oliveira Mantoan</option>
+            </select>
+            <br>
+            <h4>Deseja marcar consulta?</h4>
+            <br>
+            <label for="sim">Sim</label>
+            <input type="radio" id="sim" name="resposta" value="sim">
+            <label for="nao">Não</label>
+            <input type="radio" id="nao" name="resposta" value="nao">
+            <br>
+            <input type="submit" value="Confirmar">
+            <br>
+            <br>
+            <button type="button" id="voltarBtn">Voltar</button>
+        </div>
+    </form>
+
+
+     <script>
+        // Adiciona o ouvinte de evento para abrir a subTela
+        document.getElementById("confirmarConsultaBtn").addEventListener("click", function () {
+            abrirSubTela();
+        });
+
+        // Adiciona o ouvinte de evento para fechar a subTela
+        document.getElementById("voltarBtn").addEventListener("click", function () {
+            fecharSubTela();
+        });
+
+        function abrirSubTela() {
+            document.getElementById("subTela").style.display = "block";
+        }
+
+        function fecharSubTela() {
+            document.getElementById("subTela").style.display = "none";
+        }
+    </script>
+</body>
+<style>
+
+</style>
+
+</html>
