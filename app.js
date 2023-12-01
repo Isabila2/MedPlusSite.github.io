@@ -65,8 +65,22 @@ res.render('consultas'); // Use o mecanismo de visualização que preferir
 });
   // Lógica para a rota "/consulta"
 
-app.get('/consultasmedi', (req, res) => {
-res.render('consultasmedi'); // Use o mecanismo de visualização que preferir
+app.get('/consultasmedico', (req, res) => {
+    console.log('Acessando a rota /consultasmedico');
+
+    const query = 'SELECT nomepaciente, nomemedico, dataconsulta, hora, motivo FROM agendamentos';
+
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Erro ao buscar dados de consulta:', err);
+            return res.status(500).send(`Erro ao buscar dados de consulta: ${err.message}`);
+        }
+
+        console.log('Resultados da consulta:', results);
+
+        const dadosConsultas = Array.isArray(results) ? results : [];
+        res.render('consultasmedico', { dadosConsultas });
+    });
 });
 
 // Marcar Consultas - Removi uma função desnecessária
