@@ -139,11 +139,18 @@ function fecharSubTelaTres() {
             window.open('usuariolog.html', 'popup', 'width=459,height=570');
         }
 
+function voltar(){event.preventDefault();
+    window.location.href="/";
 
-        function voltar() {
-            event.preventDefault();
-            window.location.href = "index.html";
-        }
+  }
+
+
+  function login(){event.preventDefault();
+    window.location.href="/login";
+
+  }
+
+        
    </script>
 
 <style>
@@ -155,7 +162,78 @@ main {
 
 /*Fim tudo*/
 
+/* Inicio cabeçalho */
+   
+    #botlogo{
+      margin-right: 12%;
+      margin-top: 20px;
 
+    }
+
+      .botop{
+        background-color: #93D1FF;
+        border-radius: 40px;
+        border-color: #ffffff;
+        height: 50px;
+        width: 170px;
+        font-family: Mate SC;
+        font-size: 22px;
+        margin-bottom: 10%;
+        margin-top: 10px; 
+    }
+    
+    .linha{
+     margin-left: 690px;
+     margin-top: 100px;
+    }
+    
+   
+    .botop:hover{
+      background-color: #93D1FF;
+      box-shadow: 5px 2px #4b93ca;
+      transform: scale(1.1);
+      transition: all 0.5s;
+  }
+  
+  #foto2 {
+	margin-left: 18%;
+}
+
+  #foto2:hover{
+    
+      transform: scale(1.1);
+      transition: all 0.5s;
+  }
+
+
+
+.foto {
+	padding: 0px;
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+
+.topico {
+	padding: 0px;
+	margin-bottom: 0px;
+        display: flex;
+        align-items: center;
+}
+
+
+   .logincerto{
+    align-content: center;
+   }
+   
+ 
+    .botao{
+        width: 600px;
+        justify-content: space-between;
+        padding: 15px;
+        padding-left: 10px;
+        align-items: center;
+
+    }
 
 /*Corpo*/
 main {
@@ -822,9 +900,20 @@ main {
 
 
     <!--Header-->
-      <header>
-             <%- include('../partials/headergeral'); %>
-    </header>
+     <header>
+        
+            <div class="topico">
+                <img src="images/logoespee.png" height="40%" width="300px" button id="botlogo" onclick="voltar()">
+                
+        
+<a href="/"><button class="botop">Home</button></a>
+<a href="/exames.html"><button class="botop">Exames</button></a>
+<a href="/"><button class="botop">Unidades</button></a>
+<a href="/cirurgia.html"><button class="botop">Cirurgias</button></a>
+<a href="/planos.html"><button class="botop">Planos</button></a>
+<img src="images/iconelogin.png" height="80px" width="80px" id="foto2" button id="botlogi" onclick="login()">
+</div>
+</header>
 
     <!--Fim header-->
 

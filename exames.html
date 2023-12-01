@@ -7,20 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="exames.css">
     <title>Exames.Med+</title>
+    
 </head>
+
+
 <style>
-
-
-
-
-#foto2 {
-  padding-left: 75%;
-}
-
-
-
-
-
 
 .Centro {
   width: 101%;
@@ -271,59 +262,6 @@
 }
 
 
-</style>
-
-<script>
-    function redirecionar() {
-        window.location.href = "https://isabila2.github.io/ClinicaMedPlus.github.io/";
-    }
-
-    function Login() {
-
-        window.location.href = "https://isabila2.github.io/ClinicaMedPlus.github.io/cadastro.html";
-
-    }
-
-
-    // Função para abrir a sub-tela
-    function abrirSubTela() {
-        document.getElementById("subTela").style.display = "block";
-    }
-
-    // Função para fechar a sub-tela
-    function fecharSubTela() {
-        document.getElementById("subTela").style.display = "none";
-    }
-
-    // Função para verificar a resposta
-    function verificarResposta() {
-        var resposta = document.querySelector('input[name="resposta"]:checked');
-
-        if (resposta) {
-            if (resposta.value === "sim") {
-                // Ação a ser realizada caso a resposta seja "Sim"
-                alert("Exame confirmado!");
-                fecharSubTela();
-            } else if (resposta.value === "nao") {
-                // Ação a ser realizada caso a resposta seja "Não"
-                alert("Exame não confirmado.");
-                fecharSubTela();
-            }
-        } else {
-            alert("Por favor, selecione 'Sim' ou 'Não'."); // Alerta para resposta não selecionada
-        }
-    }
-</script>
-
-<style>
-    button {
-        padding: 10px 20px;
-        background-color: #2079b0;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
 
     /* Estilos para a sub-tela */
     .sub-tela {
@@ -388,15 +326,146 @@
         display: flex;
         justify-content: flex-end;
     }
+
+
+ /* Inicio cabeçalho */
+   
+    #botlogo{
+      margin-right: 12%;
+      margin-top: 20px;
+
+    }
+
+      .botop{
+        background-color: #93D1FF;
+        border-radius: 40px;
+        border-color: #ffffff;
+        height: 50px;
+        width: 170px;
+        font-family: Mate SC;
+        font-size: 22px;
+        margin-bottom: 10%;
+        margin-top: 10px; 
+    }
+    
+    .linha{
+     margin-left: 690px;
+     margin-top: 100px;
+    }
+    
+   
+    .botop:hover{
+      background-color: #93D1FF;
+      box-shadow: 5px 2px #4b93ca;
+      transform: scale(1.1);
+      transition: all 0.5s;
+  }
+  
+  #foto2 {
+	margin-left: 18%;
+}
+
+  #foto2:hover{
+    
+      transform: scale(1.1);
+      transition: all 0.5s;
+  }
+
+
+
+.foto {
+	padding: 0px;
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+
+.topico {
+	padding: 0px;
+	margin-bottom: 0px;
+        display: flex;
+        align-items: center;
+}
+
+
+   .logincerto{
+    align-content: center;
+   }
+   
+ 
+    .botao{
+        width: 600px;
+        justify-content: space-between;
+        padding: 15px;
+        padding-left: 10px;
+        align-items: center;
+
+    }
 </style>
+
+<script>
+    function voltar(){event.preventDefault();
+    window.location.href="/";
+
+  }
+
+
+  function login(){event.preventDefault();
+    window.location.href="/login";
+
+  }
+
+
+
+    // Função para abrir a sub-tela
+    function abrirSubTela() {
+        document.getElementById("subTela").style.display = "block";
+    }
+
+    // Função para fechar a sub-tela
+    function fecharSubTela() {
+        document.getElementById("subTela").style.display = "none";
+    }
+
+    // Função para verificar a resposta
+    function verificarResposta() {
+        var resposta = document.querySelector('input[name="resposta"]:checked');
+
+        if (resposta) {
+            if (resposta.value === "sim") {
+                // Ação a ser realizada caso a resposta seja "Sim"
+                alert("Exame confirmado!");
+                fecharSubTela();
+            } else if (resposta.value === "nao") {
+                // Ação a ser realizada caso a resposta seja "Não"
+                alert("Exame não confirmado.");
+                fecharSubTela();
+            }
+        } else {
+            alert("Por favor, selecione 'Sim' ou 'Não'."); // Alerta para resposta não selecionada
+        }
+    }
+</script>
 
 <body>
 
     <!--CABEÇALHO-->
-      <header>
-             <%- include('../partials/headergeral'); %>
-    </header>
-
+    <header>
+        
+            <div class="topico">
+                <img src="images/logoespee.png" height="40%" width="300px" button id="botlogo" onclick="voltar()">
+                
+        
+<a href="/"><button class="botop">Home</button></a>
+<a href="/exames.html"><button class="botop">Exames</button></a>
+<a href="/"><button class="botop">Unidades</button></a>
+<a href="/cirurgia.html"><button class="botop">Cirurgias</button></a>
+<a href="/planos.html"><button class="botop">Planos</button></a>
+<img src="images/iconelogin.png" height="80px" width="80px" id="foto2" button id="botlogi" onclick="login()">
+</div>
+</header>
+<br>
+<br>
+<br>
 
 
 
@@ -407,10 +476,6 @@
             <div style="color: #fff;">
                 <h2>Deseja confirmar sua consulta?</h2>
             </div>
-
-
-
-
 
             <br>
             <div style="align-items: flex-start;">
