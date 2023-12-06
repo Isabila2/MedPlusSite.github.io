@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>ADMIN-MedPlus</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<style>
+
+/* Add these styles to your existing CSS file */
+.consultation-table {
+	width: 80%;
+	margin: 20px auto;
+	border-collapse: collapse;
+  }
+  
+  .consultation-table th, .consultation-table td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+  }
+  
+  .consultation-table th {
+	background-color: #2079b0;
+	color: white;
+  }
+  
+  /* Adicione essas regras ao seu arquivo CSS existente */
+.consultation-table {
+	width: 80%;
+	margin: 20px auto;
+	border-collapse: separate; /* Adiciona espaçamento entre células e linhas */
+	border-spacing: 10px; /* Define o espaçamento desejado */
+  }
+  
+  .consultation-table th,
+  .consultation-table td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+  }
+  
+  .consultation-table th {
+	background-color: #2079b0;
+	color: white;
+  }
+  
+  
+</style>
+<body>
+
+
+    <header>
+
+      <div class="topico">
+        <img src="images/logoespee.png" height="40%" width="300px" button="" id="botlogo" onclick="voltar()">
+  
+  
+        <a href="https://isabila2.github.io/ClinicaMedPlus.github.io/"><button class="botoes">Home</button></a>
+        <a href="https://isabila2.github.io/ClinicaMedPlus.github.io/"><button class="botoes">Exames</button></a>
+        <a href="https://isabila2.github.io/ClinicaMedPlus.github.io/Consultas2.html"><button class="botoes">Consultas</button></a>
+        <a href="https://isabila2.github.io/ClinicaMedPlus.github.io/cirurgia.html"><button class="botoes">Cirurgias</button></a>
+        <a href="#planos"><button class="botoes">Planos</button></a>
+        <img src="images/Login.png" height="80px" width="80px" id="foto2" button="" onclick="login()">
+        </div>
+        </header>
+  
+
+  <br>
+
+  <!-- Table for Consultations -->
+ <table class="consultation-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+         <th>Email</th>
+        <th>Senha</th>
+        <th>Nome</th>
+        <th>Tipo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% dadosUsuarios.forEach(function(row) { %>
+        <tr>
+          <td><%= row.id %></td>
+          <td><%= row.email %></td>
+          <td><%= row.senha %></td>
+          <td><%= row.nome %></td>
+          <td><%= row.tipo %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+  <!-- End of Consultation Table -->
+
+  <div class="e515_60"></div>
+  <div class="e515_62"></div>
+  <div class="e515_70"></div>
+  <div class="e515_77"></div>
+  <div class="e515_79"></div>
+  <div class="e515_87"></div>
+  </div>
+</body>
+
+</html>
+
