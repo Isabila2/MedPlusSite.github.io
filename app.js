@@ -201,7 +201,6 @@ app.post('/login', (req, res) => {
 
 
 
-    const query = 'SELECT * FROM usuarios WHERE email = ? AND senha = SHA1(?)';
 
 
     db.query(query, [email, senha], (err, results) => {
@@ -224,7 +223,7 @@ app.post('/login', (req, res) => {
 
                 return res.status(200).redirect('/consultasmedi');
 
-                return res.status(200).redirect('/consultasmedico');
+           
 
             } else if (usuario.tipo === 'Admin') {
                 return res.status(200).redirect('/admin');
