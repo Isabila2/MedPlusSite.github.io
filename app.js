@@ -68,7 +68,7 @@ res.render('consultas'); // Use o mecanismo de visualização que preferir
 app.get('/admin', (req, res) => {
     console.log('Acessando a rota /admin');
 
-    const query = 'SELECT id, email, senha, nome, tipo FROM usuarios';
+    const query = 'SELECT id, email, senha, nome, tipo FROM usuarioss';
 
     db.query(query, (err, results) => {
         if (err) {
