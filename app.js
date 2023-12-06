@@ -165,12 +165,12 @@ passport.deserializeUser(async (id, done) => {
 });
 
 
-// Configurar EJS como o motor de visualização
+// Configurar EJS como o motor de visualizacao
 app.set('view engine', 'ejs');
 
-// Rota para a página index
+// Rota para a pagina index
 app.get('/', (req, res) => {
-  res.render('index'); // Use o mecanismo de visualização que preferir
+  res.render('index'); // Use o mecanismo de visualizacao que preferir
 });
 
 
@@ -178,7 +178,13 @@ app.post('/login', (req, res) => {
     const { email, senha } = req.body;
     console.log('Credenciais recebidas: ', email, senha);
 
+
     const query = 'SELECT * FROM usuarioss WHERE email = ? AND senha = SHA1(?)';
+
+
+
+    const query = 'SELECT * FROM usuarios WHERE email = ? AND senha = SHA1(?)';
+
 
     db.query(query, [email, senha], (err, results) => {
         if (err) {
@@ -197,7 +203,11 @@ app.post('/login', (req, res) => {
             if (usuario.tipo === 'Paciente') {
                 return res.status(200).redirect('/consultas');
             } else if (usuario.tipo === 'Médico') {
+
                 return res.status(200).redirect('/consultasmedi');
+
+                return res.status(200).redirect('/consultasmedico');
+
             } else if (usuario.tipo === 'Admin') {
                 return res.status(200).redirect('/admin');
             } else {
