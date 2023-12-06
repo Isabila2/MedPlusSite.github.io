@@ -175,39 +175,39 @@ app.get('/', (req, res) => {
 
 app.post('/login', (req, res) => {
     const { email, senha } = req.body;
-    const query = 'SELECT * FROM usuarioss WHERE email = ? AND senha = SHA1(?)';
-    const nome = 'SELECT nome FROM usuarioss';
-    const tipo = 'SELECT tipo FROM usuarioss';
+    console.log('Credenciais recebidas: ', email, senha);
 
-    db.query(query, [email, senha, nome, tipo], (err, results) => {
-        if (results.length > 0) {
-           console.log('Login bem sucedido de: '+nome);
-            req.session.loggedin = true;
-            req.session.username = results[0].nome; // Assumindo que o nome está na coluna 'nome'
-           
+    const query = 'SELECT * FROM usuarios WHERE email = ? AND senha = SHA1(?)';
 
-            switch (results[0].tipo) {
-                case 'Paciente':
-                    res.status(200).redirect('/consultas');
-                   
-                    break;
-                case 'Medico':
-                    res.status(200).redirect('/consultasmedico');
-                    break;
-                case 'Admin':
-                    res.status(200).redirect('/admin');
-                    break;
-                default:
-                    res.status(401).send({
-                        success: false,
-                        message: 'Tipo de usuário desconhecido.'
-                    });
-            }
-        } else if (err) {
+    db.query(query, [email, senha], (err, results) => {
+        if (err) {
             console.error('Erro ao verificar o login:', err);
-            res.send('Erro ao verificar o login.');
+            return res.status(500).send('Erro ao verificar o login.');
+        }
+
+        if (results.length > 0) {
+            const usuario = results[0];
+            console.log('Login bem sucedido de: ' + usuario.nome);
+
+            req.session.loggedin = true;
+            req.session.username = usuario.nome;
+            req.session.usertype = usuario.tipo;
+
+            if (usuario.tipo === 'Paciente') {
+                return res.status(200).redirect('/consultas');
+            } else if (usuario.tipo === 'Médico') {
+                return res.status(200).redirect('/consultasmedico');
+            } else if (usuario.tipo === 'Admin') {
+                return res.status(200).redirect('/admin');
+            } else {
+                return res.status(401).send({
+                    success: false,
+                    message: 'Tipo de usuário desconhecido.'
+                });
+            }
         } else {
-            res.send('Credenciais inválidas');
+            console.log('Credenciais inválidas');
+            return res.status(401).send('Credenciais inválidas');
         }
     });
 });
