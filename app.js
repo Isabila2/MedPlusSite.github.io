@@ -65,6 +65,24 @@ res.render('consultas'); // Use o mecanismo de visualização que preferir
 });
   // Lógica para a rota "/consulta"
 
+app.get('/admin', (req, res) => {
+    console.log('Acessando a rota /admin');
+
+    const query = 'SELECT id, email, senha, nome, tipo FROM usuarios';
+
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Erro ao buscar dados dos usuarios:', err);
+            return res.status(500).send(`Erro ao buscar dados dos usuarios: ${err.message}`);
+        }
+
+        console.log('Resultados da consulta:', results);
+
+        const dadosUsuarios = Array.isArray(results) ? results : [];
+        res.render('admin', { dadosUsuarios });
+    });
+});
+
 app.get('/consultasmedi', (req, res) => {
     console.log('Acessando a rota /consultasmedi');
 
@@ -181,6 +199,9 @@ app.post('/login', (req, res) => {
 
     const query = 'SELECT * FROM usuarioss WHERE email = ? AND senha = SHA1(?)';
 
+
+
+
     db.query(query, [email, senha], (err, results) => {
         if (err) {
             console.error('Erro ao verificar o login:', err);
@@ -201,9 +222,9 @@ app.post('/login', (req, res) => {
 
                 return res.status(200).redirect('/consultasmedi');
 
-                
 
-            } else if (usuario.tipo === 'Admin') {
+
+            } else if (usuario.tipo === 'Administrador') {
                 return res.status(200).redirect('/admin');
             } else {
                 return res.status(401).send({
