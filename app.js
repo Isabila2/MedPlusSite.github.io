@@ -65,8 +65,8 @@ res.render('consultas'); // Use o mecanismo de visualização que preferir
 });
   // Lógica para a rota "/consulta"
 
-app.get('/consultasmedico', (req, res) => {
-    console.log('Acessando a rota /consultasmedico');
+app.get('/consultasmedi', (req, res) => {
+    console.log('Acessando a rota /consultasmedi');
 
     const query = 'SELECT nomepaciente, nomemedico, dataconsulta, hora, motivo FROM agendamentos';
 
@@ -79,7 +79,7 @@ app.get('/consultasmedico', (req, res) => {
         console.log('Resultados da consulta:', results);
 
         const dadosConsultas = Array.isArray(results) ? results : [];
-        res.render('consultasmedico', { dadosConsultas });
+        res.render('consultasmedi', {dadosConsultas });
     });
 });
 
@@ -95,10 +95,11 @@ app.post('/marcarConsulta', async (req, res) => {
       res.status(500).send('Erro ao cadastrar consulta.');
     } else {
       console.log('Consulta cadastrada com sucesso!');
-      res.redirect('/dashboard');  // Corrigi o redirecionamento para '/dashboard'
+     res.redirect('/consultasmedi');  // Substitua '/consultasmedi' pela rota desejada
     }
   });
 });
+
 
 // Função para cadastrar um novo usuário
 async function registerUser(email, senha, nome, tipo) {
@@ -175,43 +176,42 @@ app.get('/', (req, res) => {
 
 app.post('/login', (req, res) => {
     const { email, senha } = req.body;
+    console.log('Credenciais recebidas: ', email, senha);
+
     const query = 'SELECT * FROM usuarioss WHERE email = ? AND senha = SHA1(?)';
-    const nome = 'SELECT nome FROM usuarioss';
-    const tipo = 'SELECT tipo FROM usuarioss';
 
-    db.query(query, [email, senha, nome, tipo], (err, results) => {
-        if (results.length > 0) {
-           console.log('Login bem sucedido de: '+nome);
-            req.session.loggedin = true;
-            req.session.username = results[0].nome; // Assumindo que o nome está na coluna 'nome'
-           
-
-            switch (results[0].tipo) {
-                case 'Paciente':
-                    res.status(200).redirect('/consultas');
-                   
-                    break;
-                case 'Medico':
-                    res.status(200).redirect('/consultasmedico');
-                    break;
-                case 'Admin':
-                    res.status(200).redirect('/admin');
-                    break;
-                default:
-                    res.status(401).send({
-                        success: false,
-                        message: 'Tipo de usuário desconhecido.'
-                    });
-            }
-        } else if (err) {
+    db.query(query, [email, senha], (err, results) => {
+        if (err) {
             console.error('Erro ao verificar o login:', err);
-            res.send('Erro ao verificar o login.');
+            return res.status(500).send('Erro ao verificar o login.');
+        }
+
+        if (results.length > 0) {
+            const usuario = results[0];
+            console.log('Login bem sucedido de: ' + usuario.nome);
+
+            req.session.loggedin = true;
+            req.session.username = usuario.nome;
+            req.session.usertype = usuario.tipo;
+
+            if (usuario.tipo === 'Paciente') {
+                return res.status(200).redirect('/consultas');
+            } else if (usuario.tipo === 'Médico') {
+                return res.status(200).redirect('/consultasmedi');
+            } else if (usuario.tipo === 'Admin') {
+                return res.status(200).redirect('/admin');
+            } else {
+                return res.status(401).send({
+                    success: false,
+                    message: 'Tipo de usuário desconhecido.'
+                });
+            }
         } else {
-            res.send('Credenciais inválidas');
+            console.log('Credenciais inválidas');
+            return res.status(401).send('Credenciais inválidas');
         }
     });
 });
-
 // Rota para a página de login
 app.get('/login', (req, res) => {
   res.render('login'); // Use o mecanismo de visualização que preferir
