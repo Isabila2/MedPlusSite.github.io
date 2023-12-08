@@ -113,7 +113,7 @@ app.post('/marcarConsulta', async (req, res) => {
       res.status(500).send('Erro ao cadastrar consulta.');
     } else {
       console.log('Consulta cadastrada com sucesso!');
-     res.redirect('/consultasmedi');  // Substitua '/consultasmedi' pela rota desejada
+     res.redirect('/consultas');  // Substitua '/consultasmedi' pela rota desejada
     }
   });
 });
