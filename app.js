@@ -61,31 +61,49 @@ passport.use(new LocalStrategy(
 ));
 
 app.get('/consultas', (req, res) => {
-res.render('consultas'); // Use o mecanismo de visualização que preferir
+  if (req.session.loggedin) {
+    if (req.session.tipo === "Paciente") {
+      console.log("Redericionando o Paciente logado");    
+      res.render('consultas'); // Use o mecanismo de visualização que preferir
+     
+    }
+  } else {
+    console.log("Usuário não logado (/consultas)");        
+      res.redirect('/');
+  }
 });
+
+
   // Lógica para a rota "/consulta"
 
 app.get('/admin', (req, res) => {
     console.log('Acessando a rota /admin');
+ if (req.session.loggedin) {
+   if (req.session.tipo === "Administrador") {
 
-    const query = 'SELECT id, email, senha, nome, tipo FROM usuarioss';
+     const query = 'SELECT id, email, senha, nome, tipo FROM usuarioss';
 
-    db.query(query, (err, results) => {
+      db.query(query, (err, results) => {
         if (err) {
             console.error('Erro ao buscar dados dos usuarios:', err);
             return res.status(500).send(`Erro ao buscar dados dos usuarios: ${err.message}`);
         }
-
         console.log('Resultados da consulta:', results);
-
         const dadosUsuarios = Array.isArray(results) ? results : [];
         res.render('admin', { dadosUsuarios });
-    });
+      });
+   } else {
+     res.redirect('/');
+   }
+ } else {
+     res.redirect('/');
+ }
 });
 
 app.get('/consultasmedi', (req, res) => {
     console.log('Acessando a rota /consultasmedi');
-
+if (req.session.loggedin) {
+   if (req.session.tipo === "Médico") {
     const query = 'SELECT nomepaciente, nomemedico, dataconsulta, hora, motivo FROM agendamentos';
 
     db.query(query, (err, results) => {
@@ -99,6 +117,8 @@ app.get('/consultasmedi', (req, res) => {
         const dadosConsultas = Array.isArray(results) ? results : [];
         res.render('consultasmedi', {dadosConsultas });
     });
+   }
+}
 });
 
 // Marcar Consultas - Removi uma função desnecessária
@@ -196,12 +216,7 @@ app.post('/login', (req, res) => {
     const { email, senha } = req.body;
     console.log('Credenciais recebidas: ', email, senha);
 
-
     const query = 'SELECT * FROM usuarioss WHERE email = ? AND senha = SHA1(?)';
-
-
-
-
     db.query(query, [email, senha], (err, results) => {
         if (err) {
             console.error('Erro ao verificar o login:', err);
@@ -217,14 +232,13 @@ app.post('/login', (req, res) => {
             req.session.usertype = usuario.tipo;
 
             if (usuario.tipo === 'Paciente') {
+                console.log("Paciente logado");
                 return res.status(200).redirect('/consultas');
             } else if (usuario.tipo === 'Médico') {
-
+                console.log("Médico logado");
                 return res.status(200).redirect('/consultasmedi');
-
-
-
             } else if (usuario.tipo === 'Administrador') {
+                console.log("Admin logado");            
                 return res.status(200).redirect('/admin');
             } else {
                 return res.status(401).send({
@@ -278,6 +292,7 @@ app.get('/formulario', (req, res) => {
    // res.redirect('/login');
  // }
 //});
+//testes 
 
 // Servir arquivos estáticos
 app.use(express.static(__dirname + '/'));
