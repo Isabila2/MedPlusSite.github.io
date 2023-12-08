@@ -216,12 +216,7 @@ app.post('/login', (req, res) => {
     const { email, senha } = req.body;
     console.log('Credenciais recebidas: ', email, senha);
 
-
     const query = 'SELECT * FROM usuarioss WHERE email = ? AND senha = SHA1(?)';
-
-
-
-
     db.query(query, [email, senha], (err, results) => {
         if (err) {
             console.error('Erro ao verificar o login:', err);
@@ -297,6 +292,7 @@ app.get('/formulario', (req, res) => {
    // res.redirect('/login');
  // }
 //});
+//testes 
 
 // Servir arquivos estáticos
 app.use(express.static(__dirname + '/'));
