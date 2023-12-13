@@ -157,38 +157,57 @@
   <br>
 
   <!-- Table for Consultations -->
- <table class="consultation-table">
-    <thead>
+<!-- views/admin.ejs -->
+
+<!-- Tabela de Médicos -->
+<table class="consultation-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Email</th>
+      <th>Nome</th>
+      <th>Senha</th>
+      <th>Especialidade</th>
+      <!-- Adicione outros campos conforme necessário -->
+    </tr>
+  </thead>
+  <tbody>
+    <% dadosMedicos.forEach((medico) => { %>
       <tr>
-        <th>ID</th>
-         <th>Email</th>
-        <th>Senha</th>
-        <th>Nome</th>
-        <th>Tipo</th>
+        <td><%= medico.id %></td>
+        <td><%= medico.email %></td>
+        <td><%= medico.nome %></td>
+        <td><%= medico.senha %></td>
+        <td><%= medico.especialidade %></td>
+        <!-- Adicione outros campos conforme necessário -->
       </tr>
-    </thead>
-    <tbody>
-      <% dadosUsuarios.forEach(function(row) { %>
-        <tr>
-          <td><%= row.id %></td>
-          <td><%= row.email %></td>
-          <td><%= row.senha %></td>
-          <td><%= row.nome %></td>
-          <td><%= row.tipo %></td>
-        </tr>
-      <% }); %>
-    </tbody>
-  </table>
-  <!-- End of Consultation Table -->
+    <% }); %>
+  </tbody>
+</table>
 
-  <div class="e515_60"></div>
-  <div class="e515_62"></div>
-  <div class="e515_70"></div>
-  <div class="e515_77"></div>
-  <div class="e515_79"></div>
-  <div class="e515_87"></div>
-  </div>
-
+<!-- Tabela de Pacientes -->
+<table class="consultation-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Email</th>
+      <th>Nome</th>
+      <th>Senha</th>
+      <!-- Adicione outros campos conforme necessário -->
+    </tr>
+  </thead>
+  <tbody>
+    <% dadosPacientes.forEach((paciente) => { %>
+      <tr>
+        <td><%= paciente.id %></td>
+        <td><%= paciente.email %></td>
+        <td><%= paciente.nome %></td>
+        <td><%= paciente.senha %></td>
+        <!-- Adicione outros campos conforme necessário -->
+      </tr>
+    <% }); %>
+  </tbody>
+</table>
   <script>
     
     
