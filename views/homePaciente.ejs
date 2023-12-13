@@ -18,15 +18,19 @@
     <header>
         
             <div class="topico">
-                <img src="images/logoespee.png" height="40%" width="300px" button id="botlogo" onclick="voltar()">
+                <img src="images/logoespee.png" height="40%" width="300px" button id="botlogo">
                 
         
-<a href="/"><button class="botoes">Home</button></a>
+<a href="/homePaciente"><button class="botoes">Home</button></a>
 <a href="exames.html"><button class="botoes">Exames</button></a>
 <a href="#unidades"><button class="botoes">Unidades</button></a>
-<a href="/cirurgia.html"><button class="botoes">Cirurgias</button></a>
-<a href="/planos.html"><button class="botoes">Planos</button></a>
-<img src="images/iconelogin.png" height="80px" width="80px" id="foto2" button id="botlogi" onclick="login()">
+<a href="/agendar"><button class="botoes">Agendar</button></a>
+<a href="/consultaspac"><button class="botoes">Consultas</button></a>
+<form action="/logout" method="post">
+    <button type="submit" style=" border: none; background: none; padding: 0; margin-left: 530px; ">
+<img src="images/logout.png" height="80px" width="80px" id="foto2" button id="botlogoff" onclick="logout()">
+</button>
+</form>
 </div>
 </header>
 <br>
@@ -231,7 +235,7 @@ function nextImage(){
     
 
     #foto2 {
-      margin-left: 28%;
+      margin-left: 37%;
         
     
     }
@@ -876,13 +880,14 @@ height: 400px;
         <br><br>
       <!--meio-->
       <br>
-              <div class="meio">
+            <div class="meio">
     <p class="guia">Guia MED+</p>
     <a href="/"><img src="images/exp1.png" id="exp1"></a>
     <a href="/Consultas2.html"><img src="images/exp2.png" id="exp2"></a>
     <a href="/opcoeslog.html"><img src="images/exp3.png" id="exp3"></a>
     <a href="#unidades"><img src="images/exp4.png" id="exp4"></a>
 </div>
+
             <br><br><br>
             <p class="titulouni" id="unidades">UNIDADES</p>
             <div class="unidades" >

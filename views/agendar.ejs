@@ -15,12 +15,14 @@
                 <img src="images/logoespee.png" height="40%" width="300px" button id="botlogo" onclick="voltar()">
                 
         
-<a href="/"><button class="botop">Home</button></a>
-<a href="/exames.html"><button class="botop">Exames</button></a>
-<a href="/"><button class="botop">Unidades</button></a>
+<a href="/homePaciente"><button class="botop">Home</button></a>
 <a href="/cirurgia.html"><button class="botop">Cirurgias</button></a>
-<a href="/planos.html"><button class="botop">Planos</button></a>
-<img src="images/iconelogin.png" height="80px" width="80px" id="foto2" button id="botlogi" onclick="login()">
+<form action="/logout" method="post">
+    <button type="submit" style=" border: none; background: none; padding: 0; margin-left: 800px; ">
+<img src="images/logout.png" height="80px" width="80px" id="foto2" button id="botlogoff" onclick="logout()">
+</button>
+</form>
+</div>
 </div>
 </header>
 
@@ -328,9 +330,7 @@
     <div id="subTela" style="display: none;">
      <img src="images/logo_removebg_preview_1.png" alt="" id="logos">
      <br>
-        <label for="nomepaciente">Insira seu nome completo:</label>
-<br>
-        <input type="text" id="nomepaciente" name="nomepaciente">
+       
 <br>
 <br>
         <label for="dataconsulta">Data:</label>
@@ -342,13 +342,13 @@
         <input type="time" id="hora" name="hora" placeholder="Selecione o Horário">
 <br>
 <br>
-        <label for="motivo">Insira o motivo:</label>
-        <input type="text" id="motivo" name="motivo" placeholder="Motivo">
+        <label for="comentario">Insira Informações Extras:</label>
+        <input type="text" id="comentario" name="comentario" placeholder="Dor de cabeça">
 <br>
 <br>
-        <label for="medicos">Escolha a Especialidade Desejada:</label>
+        <label for="especialidades">Escolha a Especialidade Desejada:</label>
         <br>
-        <select id="medicos" name="nomemedico">
+        <select id="especialidades" name="especialidade">
        <option value="Fisioterapia">Fisioterapia</option>
     <option value="Clinico Geral">Clinico Geral</option>
     <option value="Radiologia">Radiologista</option>
@@ -377,6 +377,7 @@
 <br>
 <br>
 <br>
+<input type="hidden" id="nomepaciente" name="nomepaciente" value="<%= req.session.nomepaciente %>">
         <button type="submit" value="Confirmar">Confirmar</button>
         
             <button type="button" id="voltarBtn">Voltar</button>

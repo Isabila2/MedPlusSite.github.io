@@ -16,7 +16,7 @@ const app = express();
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'phpmyadmin',
-  password: 'isabila',
+  password: '383234',
   database: 'medical',
 });
 
@@ -60,11 +60,11 @@ passport.use(new LocalStrategy(
   }
 ));
 
-app.get('/consultas', (req, res) => {
+app.get('/agendar', (req, res) => {
   if (req.session.loggedin) {
-    if (req.session.tipo === "Paciente") {
-      console.log("Redericionando o Paciente logado");    
-      res.render('consultas'); // Use o mecanismo de visualização que preferir
+    if (req.session.usertype === "Paciente") {
+      console.log("Redirecionando o Paciente logado");    
+      res.render('agendar', { req: req }); // Use o mecanismo de visualização que preferir
      
     }
   } else {
@@ -78,90 +78,330 @@ app.get('/consultas', (req, res) => {
 
 app.get('/admin', (req, res) => {
     console.log('Acessando a rota /admin');
- if (req.session.loggedin) {
-   if (req.session.tipo === "Administrador") {
 
-     const query = 'SELECT id, email, senha, nome, tipo FROM usuarioss';
+    if (req.session.loggedin) {
+        if (req.session.usertype === "Administrador") {
 
-      db.query(query, (err, results) => {
-        if (err) {
-            console.error('Erro ao buscar dados dos usuarios:', err);
-            return res.status(500).send(`Erro ao buscar dados dos usuarios: ${err.message}`);
+            // Consulta para médicos
+            const queryMedicos = 'SELECT * FROM médicos';
+            db.query(queryMedicos, (errMedicos, resultsMedicos) => {
+                if (errMedicos) {
+                    console.error('Erro ao buscar dados dos médicos:', errMedicos);
+                    return res.status(500).send(`Erro ao buscar dados dos médicos: ${errMedicos.message}`);
+                }
+
+                // Consulta para pacientes
+                const queryPacientes = 'SELECT * FROM pacientes';
+                db.query(queryPacientes, (errPacientes, resultsPacientes) => {
+                    if (errPacientes) {
+                        console.error('Erro ao buscar dados dos pacientes:', errPacientes);
+                        return res.status(500).send(`Erro ao buscar dados dos pacientes: ${errPacientes.message}`);
+                    }
+
+                    // Renderiza a página e passa os resultados para cada tabela
+                    res.render('admin', {
+                        dadosMedicos: Array.isArray(resultsMedicos) ? resultsMedicos : [],
+                        dadosPacientes: Array.isArray(resultsPacientes) ? resultsPacientes : []
+                    });
+                });
+            });
+        } else {
+            res.redirect('/');
         }
-        console.log('Resultados da consulta:', results);
-        const dadosUsuarios = Array.isArray(results) ? results : [];
-        res.render('admin', { dadosUsuarios });
-      });
-   } else {
-     res.redirect('/');
-   }
- } else {
-     res.redirect('/');
- }
+    } else {
+        res.redirect('/');
+    }
+});
+// Código de Cadastro de Médico.. quem pode mexer é apenas o Admin.
+app.post('/cadastromed', (req, res) => {
+    console.log('Acessando a rota /cadastromed');
+    const { nome, email, senha, especialidade } = req.body;
+    console.log(`${nome}, ${email}, ${senha}, ${especialidade}`);
+  
+    // Inserir um novo médico no banco de dados
+    const SQL = 'INSERT INTO medicos (nome, email, senha, especialidade) VALUES (?, ?, ?, ?)';
+    db.query(SQL, [nome, email, senha, especialidade], (err, result) => {
+        if (err) {
+            console.error('Erro ao cadastrar Médico:', err);
+            res.status(500).send('Erro ao cadastrar médico.');
+        } else {
+            console.log('Médico cadastrado com sucesso!');
+            res.redirect('/');  // Substitua pela rota desejada
+        }
+    });
 });
 
-app.get('/consultasmedi', (req, res) => {
-    console.log('Acessando a rota /consultasmedi');
-if (req.session.loggedin) {
-   if (req.session.tipo === "Médico") {
-    const query = 'SELECT nomepaciente, nomemedico, dataconsulta, hora, motivo FROM agendamentos';
+app.get('/cadastromed', (req, res) => {
+  res.render('cadastromed'); // Use o mecanismo de visualizacao que preferir
+});
 
-    db.query(query, (err, results) => {
-        if (err) {
+app.get('/registro_existe', (req, res) => {
+    res.render('registro_existe', { req: req });
+});
+
+app.get('/construcao', (req, res) => {
+    res.render('construcao', { req: req });
+});
+
+app.get('/registro_err', (req, res) => {
+    res.render('registro_err', { req: req });
+});
+
+app.get('/registro_ok', (req, res) => {
+    res.render('registro_ok', { req: req });
+});
+
+app.get('/exames', (req, res) => {
+    res.render('exames', { req: req });
+});
+
+app.get('/login_err', (req, res) => {
+    res.render('login_err', { req: req });
+});
+ 
+app.get('/login_credenciais', (req, res) => {
+    res.render('login_credenciais', { req: req });
+});
+ 
+app.get('/consulta_err', (req, res) => {
+    res.render('consulta_err', { req: req });
+});
+
+app.get('/consulta_ok', (req, res) => {
+    res.render('consulta_ok', { req: req });
+});
+
+app.get('/marcar_consulta', (req, res) => {
+    res.render('marcar_consulta', { req: req });
+});
+
+app.post('/consultamarca', (req, res) => {
+  res.redirect('/agendar');
+});
+
+app.get('/homeMedico', (req, res) => {
+if (req.session.loggedin) {
+   if (req.session.usertype === "Médico") {
+    res.render('homeMedico', { req: req });
+}
+}
+});
+
+app.get('/homePaciente', (req, res) => {
+if (req.session.loggedin) {
+   if (req.session.usertype === "Paciente") {
+    res.render('homePaciente', { req: req });
+}
+}
+});
+
+app.post('/sucessoConsulta', (req, res) => {
+  res.redirect('/homeMedico');
+});
+
+app.post('/erroconsulta', (req, res) => {
+  res.redirect('/');
+});
+
+app.post('/manutencao', (req, res) => {
+  res.redirect('./');
+});
+
+app.post('/pacienteManu', (req, res) => {
+  res.redirect('/construcao');
+});
+
+app.post('/erroregistro', (req, res) => {
+  res.redirect('/formulario');
+});
+
+app.post('/errologin', (req, res) => {
+  res.redirect('/login');
+});
+
+app.post('/logout', (req, res) => {
+    console.log('Deslogando');
+    req.session.destroy(() => {
+        res.redirect('/');
+    });
+});
+
+
+
+app.get('/consultaspac', (req, res) => {
+   console.log('Acessando a rota /consultasPaciente');
+
+   if (req.session.loggedin && req.session.usertype === "Paciente") {
+      const nomepaciente = req.session.nomepaciente;
+      const query = 'SELECT * FROM agendamentos WHERE nomepaciente = ?';
+
+      db.query(query, [nomepaciente], (err, results) => {
+         if (err) {
             console.error('Erro ao buscar dados de consulta:', err);
             return res.status(500).send(`Erro ao buscar dados de consulta: ${err.message}`);
-        }
+         }
 
-        console.log('Resultados da consulta:', results);
+         console.log('Resultados da consulta:', results);
 
-        const dadosConsultas = Array.isArray(results) ? results : [];
-        res.render('consultasmedi', {dadosConsultas });
-    });
+         const dadosConsultas = Array.isArray(results) ? results : [];
+         res.render('consultaspac', { dadosConsultas });
+      });
+   } else {
+      // Lógica para lidar com o médico não autenticado
+      res.status(401).send('Acesso não autorizado.');
    }
-}
+});
+
+
+//  aaaa
+app.get('/consultasmedi', (req, res) => {
+   console.log('Acessando a rota /consultasmedi');
+
+   if (req.session.loggedin && req.session.usertype === "Médico") {
+      const especialidade = req.session.especialidade;
+      const query = 'SELECT * FROM agendamentos WHERE especialidade = ?';
+
+      db.query(query, [especialidade], (err, results) => {
+         if (err) {
+            console.error('Erro ao buscar dados de consulta:', err);
+            return res.status(500).send(`Erro ao buscar dados de consulta: ${err.message}`);
+         }
+
+         console.log('Resultados da consulta:', results);
+
+         const dadosConsultas = Array.isArray(results) ? results : [];
+         res.render('consultasmedi', { dadosConsultas });
+      });
+   } else {
+      // Lógica para lidar com o médico não autenticado
+      res.status(401).send('Acesso não autorizado.');
+   }
 });
 
 // Marcar Consultas - Removi uma função desnecessária
 app.post('/marcarConsulta', async (req, res) => {
-  const { nomepaciente, nomemedico, hora, dataconsulta, motivo } = req.body;
-  console.log(`${nomepaciente}, ${nomemedico}, ${hora}, ${dataconsulta}, ${motivo}`);
+  const { nomepaciente, especialidade, hora, dataconsulta, comentario } = req.body;
+  console.log(`${nomepaciente}, ${especialidade}, ${hora}, ${dataconsulta}, ${comentario}`);
   // Inserir a nova consulta no banco de dados
-  const SQL = 'INSERT INTO agendamentos (nomepaciente, nomemedico, hora, dataconsulta, motivo) VALUES (?, ?, ?, ?, ?)';
-  db.query(SQL, [nomepaciente, nomemedico, hora, dataconsulta, motivo], (err, result) => {
+  const SQL = 'INSERT INTO agendamentos (nomepaciente, especialidade, hora, dataconsulta, comentario) VALUES (?, ?, ?, ?, ?)';
+  db.query(SQL, [nomepaciente, especialidade, hora, dataconsulta, comentario], (err, result) => {
     if (err) {
       console.error('Erro ao cadastrar consulta:', err);
       res.status(500).send('Erro ao cadastrar consulta.');
     } else {
       console.log('Consulta cadastrada com sucesso!');
-     res.redirect('/consultas');  // Substitua '/consultasmedi' pela rota desejada
+      
+     res.redirect('/marcar_consulta'); 
     }
   });
 });
 
 
+ //Confirmação de consulta na página de médico.
+app.post('/confirmarConsulta', (req, res) => {
+  const idConsulta = req.body.idConsulta;
+ console.log('ID da Consulta:', idConsulta);
+  // Buscar consulta na tabela de agendamentos
+  const queryConsulta = 'SELECT * FROM agendamentos WHERE idConsulta = ?';
+  
+ db.query(queryConsulta, [idConsulta], (err, results) => {
+    if (err) {
+      console.error('Erro ao buscar consulta:', err);
+      return res.status(500).json({ error: 'Erro ao confirmar a consulta.' });
+    }
+
+    if (!results || results.length === 0) {
+      console.error('Consulta não encontrada.');
+      return res.status(404).json({ error: 'Consulta não encontrada.' });
+    }
+
+    const consulta = results[0];
+
+    // Exibindo as informações da consulta no console
+    console.log('Coletando informações ', consulta.nomepaciente, ':', consulta.especialidade, ':', consulta.dataconsulta, ':', consulta.hora, ':', consulta.comentario);
+
+    // O restante do seu código permanece inalterado...
+
+
+
+    // Inserir consulta confirmada na tabela de consultas
+    const queryConfirmar = 'INSERT INTO consultas (nomepaciente, especialidade, dataconsulta, hora, comentario) VALUES (?, ?, ?, ?, ?)';
+    const valuesConfirmar = [consulta.nomepaciente, consulta.especialidade, consulta.dataconsulta, consulta.hora, consulta.comentario];
+    
+    db.query(queryConfirmar, valuesConfirmar, (errConfirmar) => {
+      if (errConfirmar) {
+        console.error('Erro ao confirmar a consulta:', errConfirmar);
+        return res.status(500).json({ error: 'Erro ao confirmar a consulta .' });
+      }
+
+      // Remover consulta da tabela de agendamentos
+      const queryRemover = 'DELETE FROM agendamentos WHERE idConsulta = ?';
+      db.query(queryRemover, [idConsulta], (errRemover) => {
+        if (errRemover) {
+          console.error('Erro ao remover a consulta da tabela de agendamentos:', errRemover);
+          return res.status(500).json({ error: 'Erro ao confirmar a consulta.' });
+        }
+
+        res.redirect('/consulta_ok');
+      });
+    });
+  });
+});
+
+
+
+// Confirmar Consultas, Serve para o médico confirmar se a consulta está de acordo com sua agenda!
+
 // Função para cadastrar um novo usuário
-async function registerUser(email, senha, nome, tipo) {
+app.post('/register', async (req, res) => {
+  const { email, senha, nome } = req.body;
+
   try {
     // Verificar se o usuário já existe
-    const [existingUsers] = await db.promise().query('SELECT * FROM usuarioss WHERE email = ?', [email]);
+    const [existingUsers] = await db.promise().query('SELECT * FROM pacientes WHERE email = ?', [email]);
 
     if (existingUsers.length > 0) {
-      throw new Error('Conta já existe');
+      // Usuário já existe
+      return res.redirect('/registro_existe');
     }
 
     // Inserir o novo usuário no banco de dados
-    const [result] = await db.promise().query('INSERT INTO usuarioss (email, senha, nome, tipo) VALUES (?, SHA1(?), ?, ?)', [email, senha, nome, tipo]);
+    const [result] = await db.promise().query('INSERT INTO pacientes (nome, senha, email) VALUES (?, SHA1(?), ?)', [nome, senha, email]);
 
     if (result.insertId) {
-      return result.insertId;
+      // Inserção bem-sucedida
+      return res.redirect('/registro_sucesso');
     } else {
-      throw new Error('Erro ao cadastrar o usuário.');
+      // Erro durante a inserção
+      return res.redirect('/registro_err');
     }
   } catch (error) {
-    throw error;
+    // Lidar com erros
+    console.error('Erro durante o cadastro do usuário:', error);
+    return res.redirect('/registro_err');
   }
-}
+});
 
+// Rota para Registro de Médicos Onde apenas o ADMIN tem acesso.
+app.post('/registermed', (req, res) => {
+    const { email, nome, senha, nomemedico } = req.body;
+    console.log('Dados recebidos do formulário:', email, nome, senha, nome);
+
+    // Aqui você deve realizar a lógica de inserção no banco de dados.
+    // Substitua a seguinte linha de código com a lógica real de inserção no seu banco de dados.
+
+    const SQL = 'INSERT INTO médicos (email, nome, senha, especialidade) VALUES (?, ?, SHA1(?), ?)';
+    db.query(SQL, [email, nome, senha, nomemedico], (err, result) => {
+        if (err) {
+            console.error('Erro ao cadastrar médico:', err);
+            res.status(500).send('Erro ao cadastrar médico.');
+        } else {
+            console.log('Médico cadastrado com sucesso!');
+            // Você pode redirecionar o usuário para outra página após o cadastro.
+            res.redirect('/admin'); // Substitua pela rota desejada
+        }
+    });
+});
 // Nova rota para registro de usuário
 app.post('/register', async (req, res) => {
   const { email, senha, nome, tipo } = req.body;
@@ -212,56 +452,82 @@ app.get('/', (req, res) => {
 });
 
 
-app.post('/login', (req, res) => {
-    const { email, senha } = req.body;
-    console.log('Credenciais recebidas: ', email, senha);
 
-    const query = 'SELECT * FROM usuarioss WHERE email = ? AND senha = SHA1(?)';
-    db.query(query, [email, senha], (err, results) => {
-        if (err) {
-            console.error('Erro ao verificar o login:', err);
-            return res.status(500).send('Erro ao verificar o login.');
-        }
-
-        if (results.length > 0) {
-            const usuario = results[0];
-            console.log('Login bem sucedido de: ' + usuario.nome);
-
-            req.session.loggedin = true;
-            req.session.username = usuario.nome;
-            req.session.usertype = usuario.tipo;
-
-            if (usuario.tipo === 'Paciente') {
-                console.log("Paciente logado");
-                return res.status(200).redirect('/consultas');
-            } else if (usuario.tipo === 'Médico') {
-                console.log("Médico logado");
-                return res.status(200).redirect('/consultasmedi');
-            } else if (usuario.tipo === 'Administrador') {
-                console.log("Admin logado");            
-                return res.status(200).redirect('/admin');
-            } else {
-                return res.status(401).send({
-                    success: false,
-                    message: 'Tipo de usuário desconhecido.'
-                });
-            }
-        } else {
-            console.log('Credenciais inválidas');
-            return res.status(401).send('Credenciais inválidas');
-        }
-    });
-});
 // Rota para a página de login
 app.get('/login', (req, res) => {
   res.render('login'); // Use o mecanismo de visualização que preferir
 });
+// Ação de Login Redirecionamento inteligente.
+app.post('/login', (req, res) => {
+    const { email, senha } = req.body;
+    console.log('Credenciais recebidas:', email, senha);
 
-app.post('/login', passport.authenticate('local', {
-  successRedirect: '/dashboard', // Redirecionamento após login bem-sucedido
-  failureRedirect: '/login',    // Redirecionamento após falha de login
-  failureFlash: true,          // Permite o uso de mensagens flash
-}));
+    // Verificar na tabela de pacientes
+    const queryPacientes = 'SELECT * FROM pacientes WHERE email = ? AND senha = SHA1(?)';
+    db.query(queryPacientes, [email, senha], (err, results) => {
+        if (err) {
+            console.error('Erro ao verificar o login:', err);
+            return res.redirect('/login_err');
+        }
+
+        if (results && results.length > 0) {
+            const usuario = results[0];
+            console.log('Login bem sucedido de Paciente: ' + usuario.nomepaciente);
+            req.session.loggedin = true;
+            req.session.username = usuario.nomepaciente;
+            req.session.usertype = 'Paciente';
+            req.session.nomepaciente = usuario.nomepaciente;
+            return res.status(200).redirect('/homePaciente');
+        } else {
+            // Se não encontrado na tabela de pacientes, verificar na tabela de médicos
+            const queryMedicos = 'SELECT * FROM médicos WHERE email = ? AND senha = SHA1(?)';
+            db.query(queryMedicos, [email, senha], (err, results) => {
+                // Código semelhante ao bloco anterior, apenas muda a tabela e o tipo de usuário
+
+                if (err) {
+                    console.error('Erro ao verificar o login:', err);
+                    return res.redirect('/login_err');
+                }
+
+                if (results && results.length > 0) {
+                    const usuario = results[0];
+                    console.log('Login bem sucedido de Médico: ' + usuario.nome);
+                    req.session.loggedin = true;
+                    req.session.username = usuario.nome;
+                    req.session.usertype = 'Médico';
+                    req.session.especialidade = usuario.especialidade;
+                    return res.status(200).redirect('/homeMedico');
+                } else {
+                    // Se não encontrado na tabela de médicos, verificar na tabela de admins
+                    const queryAdmins = 'SELECT * FROM admins WHERE email = ? AND senha = ?';
+                    db.query(queryAdmins, [email, senha], (err, results) => {
+                        // Código semelhante ao bloco anterior, apenas muda a tabela e o tipo de usuário
+
+                        if (err) {
+                            console.error('Erro ao verificar o login:', err);
+                            return res.redirect('/login_err');
+                        }
+
+                        if (results && results.length > 0) {
+                            const usuario = results[0];
+                            console.log('Login bem sucedido de Admin: ' + usuario.nome);
+                            req.session.loggedin = true;
+                            req.session.username = usuario.nome;
+                            req.session.usertype = 'Administrador';
+                            return res.redirect('/admin');
+                        } else {
+                            console.log('Credenciais inválidas');
+                            return res.redirect('/login_credenciais');
+                        }
+                    });
+                }
+            });
+        }
+    });
+});
+
+
+
 
 
 // Rota protegida - exemplo da página de dashboard

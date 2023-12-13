@@ -62,7 +62,7 @@
                 height: 50px;
                 width: 160px;
                 font-family: Mate SC;
-                margin-left: 190px;
+                margin-left: 295px;
             }
             
              #entrar:hover {
@@ -75,7 +75,7 @@
             #logo {
               width: 450px;
               height: 180px;
-              margin-left: 90px;
+              margin-left: 137px;
            }
 
         </style>
@@ -84,25 +84,21 @@
 <body class="container">
 
     <header>
-             <%- include('../partials/header'); %>
+         
     </header>
 
     <main>
         <div class="login-container">
-            <div class="login-card">
+            <div class="login-card" style="margin-top:100px;">
                <img src="images/logo_removebg_preview_1.png" alt="" id="logo">
-                <form action="/login" method="post">
+                <form action="/sucessoConsulta" method="post">
                     <div class="login-fields">
-                        <div><label for="email" style="width: 30vw;">Email:</label></div>
-                        <div><input type="text" id="email" name="email" required style="width: 30vw;"></div>
+                        <div><h1 style="font-family: Mate SC;">Consulta marcada com sucesso.</h1></div>
                     </div>
                     <br>
-                    <div class="login-fields">
-                        <div><label for="senha">Senha:</label></div>
-                        <div> <input type="password" id="senha" name="senha" required style="width: 30vw;"></div>
-                    </div>
+                    
                     <br>
-                    <div class="login-fields"><button type="submit" id="entrar">Entrar</button></div>
+                    <div class="login-fields"><button type="submit" id="entrar">Home</button></div>
                 </form>
             </div>
         </div>

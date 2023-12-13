@@ -33,6 +33,7 @@
 	margin: 20px auto;
 	border-collapse: separate; /* Adiciona espaçamento entre células e linhas */
 	border-spacing: 10px; /* Define o espaçamento desejado */
+	margin-right: 210px;
   }
   
   .consultation-table th,
@@ -45,6 +46,7 @@
   .consultation-table th {
 	background-color: #2079b0;
 	color: white;
+	
   }
   /* Header */
 
@@ -80,7 +82,7 @@
   }
   
   #foto2 {
-	margin-left: 18%;
+	margin-left: 48%;
 }
 
   #foto2:hover{
@@ -126,6 +128,8 @@
   width: 100%;
     height: 10%;
     
+
+
 }
 /* Fim Header */
   
@@ -138,12 +142,11 @@
                 <img src="images/logoespee.png" height="40%" width="300px" button id="botlogo" onclick="voltar()">
                 
         
-<a href="/"><button class="botop">Home</button></a>
-<a href="/exames.html"><button class="botop">Exames</button></a>
-<a href="/"><button class="botop">Unidades</button></a>
-<a href="/cirurgia.html"><button class="botop">Cirurgias</button></a>
-<a href="/planos.html"><button class="botop">Planos</button></a>
-<img src="images/iconelogin.png" height="80px" width="80px" id="foto2" button id="botlogi" onclick="login()">
+<a href="/homeMedico"><button class="botop">Home</button></a>
+<form action="/logout" method="post">
+    <button type="submit" style=" border: none; background: none; padding: 0; margin-left: 990px; ">
+<img src="images/logout.png" height="80px" width="80px" id="foto2" button id="botlogoff" onclick="logout()">
+</button>
 </div>
 </header>
 
@@ -154,30 +157,44 @@
      <br>
       <br>
        <br>
-
+<% 
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = new Date(dateString).toLocaleDateString('pt-BR', options);
+    return formattedDate;
+  };
+%>
   <!-- Table for Consultations -->
- <table class="consultation-table">
+<form action="/confirmarConsulta" method="post">
+  <table class="consultation-table">
     <thead>
       <tr>
         <th>Paciente</th>
-         <th>Médico</th>
+        <th>Especialidade</th>
         <th>Data</th>
         <th>Horário</th>
-        <th>Motivo</th>
+        <th>Comentários</th>
+        <th>Confirmação</th>
       </tr>
     </thead>
     <tbody>
       <% dadosConsultas.forEach(function(row) { %>
         <tr>
           <td><%= row.nomepaciente %></td>
-          <td><%= row.nomemedico %></td>
-          <td><%= row.dataconsulta %></td>
+          <td><%= row.especialidade %></td>
+          <td><%= formatDate(row.dataconsulta) %></td>
           <td><%= row.hora %></td>
-          <td><%= row.motivo %></td>
+          <td><%= row.comentario %></td>
+          <td>
+            <button type="submit" class="b1" name="idConsulta" value="<%= row.idConsulta %>">Marcar Consulta</button>
+          </td>
         </tr>
       <% }); %>
     </tbody>
   </table>
+</form>
+
+
   <!-- End of Consultation Table -->
 
   <div class="e515_60"></div>
