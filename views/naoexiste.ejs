@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ptbr">
-  <title>Paciente - Med+</title>
+  <title>Página não encontrada - Med+</title>
 <head>
 
  
@@ -52,17 +52,6 @@
                 border-radius: 10px;
                 border: 1px solid #a8a8a9;
             }
-            
-            select {
-                font-size: 25px;
-                border-radius: 10px;
-            
-                border: 1px solid #a8a8a9;
-            }
-            
-            #tipo{
-             margin-left: -60px;
-            }
 
             #entrar {
                 font-size: 22px;
@@ -86,62 +75,42 @@
             #logo {
               width: 450px;
               height: 180px;
-              margin-left: 90px;}
-              
-            #cadastrar {
-             background-color: #93D1FF;
-             border-radius: 40px;
-             border-color: #ffffff;
-             height: 50px;
-             width: 170px;
-             font-family: Mate SC;
-             font-size: 22px;
-             margin-top: 10px;
-             margin-left: 100px;
-             }
-             
-          
+              margin-left: 58px;
+           }
+           
+           h1{
+           margin-left: -20px;
+           }
 
         </style>
+
+<script>
+
+function voltar() {
+window.location.href="./";
+
+}
+</script>
 </head>
 
 <body class="container">
 
     <header>
-             <%- include('../partials/header'); %>
+         
     </header>
 
     <main>
         <div class="login-container">
-            <div class="login-card">
+            <div class="login-card" style="margin-top:100px;">
                <img src="images/logo_removebg_preview_1.png" alt="" id="logo">
-                <form method="post" action="/register">
                     <div class="login-fields">
-                    
-                        <div><label for="email" style="width: 30vw;">Email:</label></div>
-                        <div><input type="text" id="email" name="email" required style="width: 30vw;"></div>
+                        <div><h1 style="font-family: Mate SC;">Esta página não existe</h1></div>
                     </div>
                     <br>
                     
-                     <div class="login-fields">
-                    
-                        <div><label for="nomepaciente" style="width: 30vw;">Nome:</label></div>
-                        <div><input type="text" id="nomepaciente" name="nomepaciente" required style="width: 30vw;"></div>
-                    </div>
                     <br>
-                    
-                    <div class="login-fields">
-                        <div><label for="senha">Senha:</label><div>
-                        <div> <input type="password" id="senha" name="senha" required style="width: 30vw;"></div>
-                    <div class="login-fields">
-                    
-                    <br>
-                    <div class="login-fields">
-        
-</div>
-<br>
-                    <div class="login-fields"><button type="submit" id="cadastrar">Cadastrar</button></div>
-                </form>
+                    <div class="login-fields"><button type="submit" id="entrar" onclick="voltar()">Voltar</button></div>
+               
             </div>
         </div>
     </main>
@@ -184,6 +153,3 @@
 </body>
 
 </html>
-
-
-

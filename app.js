@@ -125,6 +125,15 @@ app.get('/registro_err', (req, res) => {
     res.render('registro_err', { req: req });
 });
 
+app.get('/construcao', (req, res) => {
+    res.render('construcao', { req: req });
+});
+
+app.get('/rota_err', (req, res) => {
+    res.render('rota_err', { req: req });
+});
+
+
 app.get('/registro_ok', (req, res) => {
     res.render('registro_ok', { req: req });
 });
@@ -173,6 +182,22 @@ app.post('/sucessoConsulta', (req, res) => {
   res.redirect('/homeMedico');
 });
 
+app.post('/manutencaopac', (req, res) => {
+  res.redirect('consultaspac');
+});
+
+app.post('/manutencaopac', (req, res) => {
+  res.redirect('consultaspac');
+});
+
+app.post('/pacienteManu', (req, res) => {
+  res.redirect('/construcao');
+});
+
+app.post('/sucessoRegis', (req, res) => {
+  res.redirect('/login');
+});
+
 app.post('/erroconsulta', (req, res) => {
   res.redirect('/');
 });
@@ -197,7 +222,7 @@ app.get('/consultaspac', (req, res) => {
 
    if (req.session.loggedin && req.session.usertype === "Paciente") {
       const nomepaciente = req.session.nomepaciente;
-      const query = 'SELECT * FROM agendamentos WHERE nomepaciente = ?';
+      const query = 'SELECT * FROM consultas WHERE nomepaciente = ?';
 
       db.query(query, [nomepaciente], (err, results) => {
          if (err) {
@@ -212,7 +237,7 @@ app.get('/consultaspac', (req, res) => {
       });
    } else {
       // Lógica para lidar com o médico não autenticado
-      res.status(401).send('Acesso não autorizado.');
+      res.redirect('/rota_err');
    }
 });
 
@@ -236,7 +261,7 @@ app.get('/consultasmedi', (req, res) => {
       });
    } else {
       // Lógica para lidar com o médico não autenticado
-      res.status(401).send('Acesso não autorizado.');
+      res.redirect('/rota_err');
    }
 });
 
@@ -311,7 +336,7 @@ app.post('/confirmarConsulta', (req, res) => {
 
 // Função para cadastrar um novo usuário
 app.post('/register', async (req, res) => {
-  const { email, senha, nome } = req.body;
+  const { email, senha, nomepaciente } = req.body;
 
   try {
     // Verificar se o usuário já existe
@@ -323,11 +348,12 @@ app.post('/register', async (req, res) => {
     }
 
     // Inserir o novo usuário no banco de dados
-    const [result] = await db.promise().query('INSERT INTO pacientes (nome, senha, email) VALUES (?, SHA1(?), ?)', [nome, senha, email]);
+    const [result] = await db.promise().query('INSERT INTO pacientes (nomepaciente, senha, email) VALUES (?, SHA1(?), ?)', [nomepaciente, senha, email]);
 
     if (result.insertId) {
       // Inserção bem-sucedida
-      return res.redirect('/registro_sucesso');
+     console.log('Usuario cadastrando com email:',email,' nome:',nomepaciente,' e senha:',senha);
+      return res.redirect('/registro_ok');
     } else {
       // Erro durante a inserção
       return res.redirect('/registro_err');
@@ -338,6 +364,27 @@ app.post('/register', async (req, res) => {
     return res.redirect('/registro_err');
   }
 });
+
+app.post('/registermed', (req, res) => {
+    const { email, nome, senha, nomemedico } = req.body;
+    console.log('Dados recebidos do formulário:', email, nome, senha, nome);
+
+    // Aqui você deve realizar a lógica de inserção no banco de dados.
+    // Substitua a seguinte linha de código com a lógica real de inserção no seu banco de dados.
+
+    const SQL = 'INSERT INTO médicos (email, nome, senha, especialidade) VALUES (?, ?, SHA1(?), ?)';
+    db.query(SQL, [email, nome, senha, nomemedico], (err, result) => {
+        if (err) {
+            console.error('Erro ao cadastrar médico:', err);
+            res.status(500).send('Erro ao cadastrar médico.');
+        } else {
+            console.log('Médico cadastrado com sucesso!');
+            // Você pode redirecionar o usuário para outra página após o cadastro.
+            res.redirect('/admin'); // Substitua pela rota desejada
+        }
+    });
+});
+
 
 // Nova rota para registro de usuário
 app.post('/register', async (req, res) => {
@@ -491,6 +538,12 @@ app.get('/formulario', (req, res) => {
 
 });
 
+app.use(express.static(__dirname + '/'));
+
+app.use((req, res, next) => {
+  res.status(404).render('naoexiste', { req: req, error: { status: 404 } });
+});
+
 // Rota protegida - exemplo da página de dashboard
 //app.get('/fechar.html', (req, res) => {
  // if (req.isAuthenticated()) {
@@ -506,7 +559,7 @@ app.get('/formulario', (req, res) => {
 //testes 
 
 // Servir arquivos estáticos
-app.use(express.static(__dirname + '/'));
+
 
 // Iniciar o servidor
 app.listen(port, () => {

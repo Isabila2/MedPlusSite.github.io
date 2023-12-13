@@ -52,17 +52,6 @@
                 border-radius: 10px;
                 border: 1px solid #a8a8a9;
             }
-            
-            select {
-                font-size: 25px;
-                border-radius: 10px;
-            
-                border: 1px solid #a8a8a9;
-            }
-            
-            #tipo{
-             margin-left: -60px;
-            }
 
             #entrar {
                 font-size: 22px;
@@ -73,7 +62,7 @@
                 height: 50px;
                 width: 160px;
                 font-family: Mate SC;
-                margin-left: 190px;
+                margin-left: 215px;
             }
             
              #entrar:hover {
@@ -86,21 +75,8 @@
             #logo {
               width: 450px;
               height: 180px;
-              margin-left: 90px;}
-              
-            #cadastrar {
-             background-color: #93D1FF;
-             border-radius: 40px;
-             border-color: #ffffff;
-             height: 50px;
-             width: 170px;
-             font-family: Mate SC;
-             font-size: 22px;
-             margin-top: 10px;
-             margin-left: 100px;
-             }
-             
-          
+              margin-left: 137px;
+           }
 
         </style>
 </head>
@@ -108,39 +84,21 @@
 <body class="container">
 
     <header>
-             <%- include('../partials/header'); %>
+         
     </header>
 
     <main>
         <div class="login-container">
-            <div class="login-card">
+            <div class="login-card" style="margin-top:100px;">
                <img src="images/logo_removebg_preview_1.png" alt="" id="logo">
-                <form method="post" action="/register">
+                <form action="/manutencaopac" method="post">
                     <div class="login-fields">
-                    
-                        <div><label for="email" style="width: 30vw;">Email:</label></div>
-                        <div><input type="text" id="email" name="email" required style="width: 30vw;"></div>
+                        <div><h1 style="font-family: Mate SC;">Página em Construção</h1></div>
                     </div>
                     <br>
                     
-                     <div class="login-fields">
-                    
-                        <div><label for="nomepaciente" style="width: 30vw;">Nome:</label></div>
-                        <div><input type="text" id="nomepaciente" name="nomepaciente" required style="width: 30vw;"></div>
-                    </div>
                     <br>
-                    
-                    <div class="login-fields">
-                        <div><label for="senha">Senha:</label><div>
-                        <div> <input type="password" id="senha" name="senha" required style="width: 30vw;"></div>
-                    <div class="login-fields">
-                    
-                    <br>
-                    <div class="login-fields">
-        
-</div>
-<br>
-                    <div class="login-fields"><button type="submit" id="cadastrar">Cadastrar</button></div>
+                    <div class="login-fields"><button type="submit" id="entrar">Voltar</button></div>
                 </form>
             </div>
         </div>
@@ -184,6 +142,3 @@
 </body>
 
 </html>
-
-
-

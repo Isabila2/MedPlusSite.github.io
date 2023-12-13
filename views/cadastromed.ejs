@@ -115,7 +115,7 @@
         <div class="login-container">
             <div class="login-card">
                <img src="images/logo_removebg_preview_1.png" alt="" id="logo">
-                <form method="post" action="/register">
+                <form method="post" action="/registermed">
                     <div class="login-fields">
                     
                         <div><label for="email" style="width: 30vw;">Email:</label></div>
@@ -125,8 +125,8 @@
                     
                      <div class="login-fields">
                     
-                        <div><label for="nomepaciente" style="width: 30vw;">Nome:</label></div>
-                        <div><input type="text" id="nomepaciente" name="nomepaciente" required style="width: 30vw;"></div>
+                        <div><label for="nome" style="width: 30vw;">Nome:</label></div>
+                        <div><input type="text" id="nome" name="nome" required style="width: 30vw;"></div>
                     </div>
                     <br>
                     
@@ -137,7 +137,35 @@
                     
                     <br>
                     <div class="login-fields">
-        
+<br>
+                    <label for="medicos">Escolha a Especialidade Desejada:</label>
+        <br>
+        <select id="medicos" name="nomemedico" style="select {
+    font-size: 28px; /* ou o tamanho desejado */
+    border-radius: 10px;
+    border: 1px solid #a8a8a9;
+    width: 30vw; /* ou o tamanho desejado */
+}
+">
+       <option value="Fisioterapia">Fisioterapia</option>
+    <option value="Clinico Geral">Clinico Geral</option>
+    <option value="Radiologia">Radiologista</option>
+    <option value="Urologia">Urologista</option>
+    <option value="Ginecologia">Ginecologista</option>
+    <option value="Dermatologia">Dermatologia</option>
+    <option value="Pediatria">Pediatria</option>
+    <option value="Oncologia">Oncologia</option>
+    <option value="Cirurgião Plástico">Lucas Eduardo Rosa</option>
+    <option value="Nutrição">Nutrição</option>
+    <option value="Psiquiatria">Psiquiatria</option>
+    <option value="Neurologia">Neurologista</option>
+    <option value="Anestesiologia">Anestesiologia</option>
+      <option value="Cardiologia">Cardiologia</option>
+      <option value="Angiologia">Angiologia</option>
+      <option value="Endoscopia">Endoscopia</option>
+      
+</select>
+
 </div>
 <br>
                     <div class="login-fields"><button type="submit" id="cadastrar">Cadastrar</button></div>
@@ -184,6 +212,3 @@
 </body>
 
 </html>
-
-
-
