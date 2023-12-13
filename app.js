@@ -183,11 +183,11 @@ app.post('/sucessoConsulta', (req, res) => {
 });
 
 app.post('/manutencaopac', (req, res) => {
-  res.redirect('consultaspac');
+  res.redirect('homepaciente');
 });
 
 app.post('/manutencaopac', (req, res) => {
-  res.redirect('consultaspac');
+  res.redirect('homepaciente');
 });
 
 app.post('/pacienteManu', (req, res) => {

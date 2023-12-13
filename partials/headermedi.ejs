@@ -1,0 +1,64 @@
+
+    <header>
+        
+            <div class="topico">
+                <img src="images/logoespee.png" height="40%" width="300px" button id="botlogo" onclick="voltar()">
+                
+        <div class="linha">
+<a href="/admin"><button class="botop">Admin</button></a>
+<a href="/cadastromed"><button class="botop">Cadastro Médico</button></a>
+<a href="/login"><button class="botop">Login</button></a>
+
+</div>
+</div>
+</header>
+
+<script>
+function voltar(){event.preventDefault();
+    window.location.href="/";
+
+  }
+</script>
+<style>
+    /* Inicio cabeçalho */
+   
+    #botlogo{
+      margin-right: 17%;
+      margin-top: 20px;
+
+    }
+
+    .topico {
+      padding: 0px;
+      margin-bottom: 0px;
+     
+    }
+
+   
+    .botop{
+        background-color: #93D1FF;
+        border-radius: 40px;
+        border-color: #ffffff;
+        height: 50px;
+        width: 170px;
+        font-family: Mate SC;
+        font-size: 22px;
+        margin-top: 10px;
+       
+    }
+    
+    
+    .linha{
+     margin-left: 690px;
+     margin-top: 100px;
+    }
+    
+    
+    .botop:hover{
+      background-color: #93D1FF;
+      box-shadow: 5px 2px #4b93ca;
+      transform: scale(1.1);
+      transition: all 0.5s;
+  }
+   
+</style>

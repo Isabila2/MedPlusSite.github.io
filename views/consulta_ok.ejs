@@ -62,7 +62,7 @@
                 height: 50px;
                 width: 160px;
                 font-family: Mate SC;
-                margin-left: 295px;
+                margin-left: 290px;
             }
             
              #entrar:hover {
@@ -75,7 +75,11 @@
             #logo {
               width: 450px;
               height: 180px;
-              margin-left: 137px;
+              margin-left: 200px;
+           }
+           
+           h1{
+           margin-left: -10px;
            }
 
         </style>
@@ -93,17 +97,22 @@
                <img src="images/logo_removebg_preview_1.png" alt="" id="logo">
                 <form action="/sucessoConsulta" method="post">
                     <div class="login-fields">
-                        <div><h1 style="font-family: Mate SC;">Consulta marcada com sucesso.</h1></div>
+                        <div><h1 style="font-family: Mate SC;">Consulta marcada com sucesso!</h1></div>
                     </div>
                     <br>
                     
                     <br>
-                    <div class="login-fields"><button type="submit" id="entrar">Home</button></div>
+                    <div class="login-fields"><button type="submit" id="entrar" onclick="voltar()">Home</button></div>
                 </form>
             </div>
         </div>
     </main>
+<script>
+    function voltar(){event.preventDefault();
+    window.location.href="/homePaciente";
 
+  }
+</script>
     <!-- O código a seguir utiliza as classes do BootStrap-->
     <!-- <div class="container">
         <div class="panel panel-default">
