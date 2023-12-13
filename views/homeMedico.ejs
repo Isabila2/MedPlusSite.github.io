@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <link rel="stylesheet" href="index.css">
+    <link rel="Logoo" href="images/Logoo.png">
+    <title>Med+</title>
+
+</head>
+
+<body>
+    <!-- Cabeçalho -->
+    
+    <header>
+        
+            <div class="topico">
+                <img src="images/logoespee.png" height="40%" width="300px" button id="botlogo">
+                
+        
+<a href="/homeMedico"><button class="botoes">Home</button></a>
+<a href="examesmed"><button class="botoes">Exames</button></a>
+<a href="#unidades"><button class="botoes">Unidades</button></a>
+<a href="/consultasmedi"><button class="botoes">Consultas</button></a>
+<form action="/logout" method="post">
+    <button type="submit" style=" border: none; background: none; padding: 0; margin-left: 660px; ">
+<img src="images/logout.png" height="80px" width="80px" id="foto2" button id="botlogoff" onclick="logout()">
+</button>
+</form>
+</div>
+</header>
+<br>
+<br>
+<br>
+<br>
+
+
+  
+
+
+
+<script>
+function voltar(){event.preventDefault();
+    window.location.href="/";
+
+  }
+
+const divResultado = document.getElementById("divResultado");
+const divEscolha = document.getElementById("divEscolha");
+
+  function login(){event.preventDefault();
+    window.location.href="/login";
+
+  }
+
+  //Carrossel//
+
+let count = 1;
+document.getElementById("radio1").checked = true;
+
+setInterval( function(){
+    nextImage();
+}, 1000)
+
+
+function nextImage(){
+    count++;
+    if(count>4){
+        count = 1;
+    }
+
+    document.getElementById("radio"+count).checked = true;
+} 
+
+ 
+ 
+
+</script>
+
+<style>
+* {
+  border: 1px solid rgba(255, 0, 0, 0);
+}
+#foto2 {
+	margin-left: 0%;
+    
+
+}
+
+
+
+.foto {
+	padding: 0px;
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+
+.topico {
+	padding: 0px;
+	margin-bottom: 0px;
+  display: flex;
+  align-items: center;
+
+}
+.slider{
+    margin: 0 auto;
+    width: 100%;
+    height: 800px;
+    overflow: hidden;
+    margin-top: 30px;
+  }
+  
+  .slides{
+    width: 400%;
+    height: 350px;
+    display: flex;
+  }
+  
+  .slides input{
+    display: none;
+  }
+  
+  .slide{
+    width: 25%;
+    position: relative;
+    transition: 1s;
+  }
+  
+  .slide img{
+    width:  100%;
+    
+  }
+  
+  .manual-navigation{
+    position: absolute;
+    width: 980px;
+    margin-top: 340px;
+    display: flex;
+    justify-content: center;
+    margin-left: 23%;
+   
+    
+  }
+  
+  .manual-btn{
+    border: 2px solid #000000;
+    padding: 50px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: 0.5s;
+    padding: 23px;
+    border-radius: 50px;
+   
+  }
+  
+  .manual-btn:not(:last-child){
+    margin-right: 5px;
+  }
+  
+  .manual-btn:hover{
+    background-color: #171d20;
+  }
+  
+  #radio1:checked ~ .first{
+    margin-left: 0;
+  }
+  
+  #radio2:checked ~ .first{
+    margin-left: -25%;
+  }
+  
+  #radio3:checked ~ .first{
+    margin-left: -50%;
+  }
+  
+  #radio4:checked ~ .first{
+    margin-left: -75%;
+  }
+  
+  .navigation-auto div{
+    border: 2px solid #92D1FF;
+    padding: 23px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 1s;
+    
+  }
+  
+  .navigation-auto{
+    position: absolute;
+    width: 980px;
+    margin-top: 690px;
+    display: flex;
+    justify-content: center;
+    margin-left: 23%;
+  }
+  
+  .navigation-auto div:not(:last-child){
+    margin-right: 5px;
+  }
+  
+  
+  #radio1:checked ~ .navigation-auto .auto-btn1{
+    background-color: #92D1FF ;
+    
+  }
+  
+  
+  #radio2:checked ~ .navigation-auto .auto-btn2{
+    background-color: #92D1FF;
+  }
+  
+  
+  #radio3:checked ~ .navigation-auto .auto-btn3{
+    background-color: #92D1FF;
+  }
+  
+  
+  #radio4:checked ~ .navigation-auto .auto-btn4{
+    background-color: #92D1FF;
+  }
+  
+
+  * {
+    padding: 0px;
+    margin: 0px;
+    
+    font-family: Mate SC;
+}
+    /* Inicio cabeçalho */
+    
+
+    #foto2 {
+      margin-left: 37%;
+        
+    
+    }
+    #foto2:hover{
+    
+      transform: scale(1.1);
+      transition: all 0.5s;
+  }
+    
+
+    #botlogo{
+      margin-right: 15%;
+    }
+
+    .topico {
+      padding: 0px;
+      margin-bottom: 0px;
+    }
+    
+
+
+
+   .logincerto{
+    align-content: center;
+   }
+    .botoes{
+        background-color: #93D1FF;
+        border-radius: 40px;
+        border-color: #ffffff;
+        height: 50px;
+        width: 120px;
+        font-family: Mate SC;
+        font-size: larger;
+        margin-bottom: 10%;
+        
+     
+       
+    }
+
+    .botoes:hover{
+      background-color: #93D1FF;
+      box-shadow: 5px 2px #4b93ca;
+      transform: scale(1.1);
+      transition: all 0.5s;
+  }
+    .botao{
+        width: 600px;
+        justify-content: space-between;
+        padding: 15px;
+        padding-left: 10px;
+        align-items: center;
+
+    }
+/* Inicio Corpo */
+
+
+
+
+/* Imagem principal e agende e preços */
+    main{
+        background-color: rgb(255, 255, 255);
+        width: 100%;
+        height: 700px;
+       
+
+    }
+    
+    .agende{
+        background-image: url(images/Fundohp.jfif);
+        height: 222px;
+        width: 100%;
+        
+    
+    }
+
+    .textoagende{
+        width: 100%;
+        padding-left: 44%;
+        font-family: Mate SC;
+    }
+
+    .precoa{
+        width: 100%;
+        padding-left: 43%;
+        top: 12%;
+        
+    }
+    .unidade{
+        width: 100%;
+        padding-left: 43%;
+        top: 14%;
+        z-index: 1;
+    }
+
+.retangulounidade{
+    width: 200px;
+    height: 20px;
+    background-color: #fff;
+    border-radius: 25px;
+    position: absolute;
+    right: 46%;
+    z-index: 0; 
+}
+
+
+
+main{
+  height: 1100px;
+}
+    
+    /* Inicio Rodapé */
+    footer{
+    background-image: url(images/imgfooter.png);
+    background-size: cover;
+    width: 100%;
+    height: 612px;
+    margin-top: 100px; 
+    }
+
+    .letrasfinais{
+        color: #fff;
+    }
+
+    #direitos{
+      color: #ffffff;
+      margin-top: 430px;
+    }
+
+    #siga{
+      color: #ffffff;
+      margin-left: 1440px;
+      margin-top: -600px ;
+    }
+    
+    #siga:hover{
+      color: #93D1FF;
+      
+    }
+
+    #redes{
+      color: #000000;
+      margin-left: 1440px;
+      margin-top: 10px;
+      background-color: #ffffff;
+      width: 140px;
+      text-align: center;
+      border-radius: 10px;
+      border-color: #4b93ca;
+
+    }
+
+    #redes:hover{
+      color: #ffffff;
+      background-color: #2079B0;
+      
+    }
+#finale{
+  color: #ffffff ;
+  font-size: 30px;
+  font-family: Mate SC;
+  margin-top: 30px;
+}
+#finale2{
+  color: #ffffff ;
+  font-size: 30px;
+  font-family: Mate SC;
+  margin-top: 10px;
+}
+
+#finale2:hover{
+ color: #93D1FF;
+}
+
+#finale:hover{
+  color: #93D1FF;
+}
+
+#imagemfinals{
+  margin-left: px;
+  width: 400px;
+  height: 130px;
+
+}
+
+.meio{
+  height:650px;
+  background-color: #B5DDFC;
+  width: 100%;
+  margin-top: 90px;
+  align-items: center;
+}
+
+#exp1{
+  width: 330px;
+  height: 250px;
+  margin-left: 170px;
+  margin-top: 100px;
+}
+#exp1:hover{
+  transform: scale(1.1);
+    transition: all 0.5s;
+}
+#exp2{
+  width: 330px;
+  height: 250px;
+  margin-left: 70px;
+}
+#exp2:hover{
+  transform: scale(1.1);
+    transition: all 0.5s;
+}
+
+#exp3{
+  width: 330px;
+  height: 250px;
+  margin-left: 70px;
+}
+#exp3:hover{
+  transform: scale(1.1);
+    transition: all 0.5s;
+}
+#exp4{
+  width: 330px;
+  height: 250px;
+  margin-left: 70px;
+}
+#exp4:hover{
+  transform: scale(1.1);
+    transition: all 0.5s;
+}
+
+#bemvindo{
+  margin-left: 570px;
+  margin-top: 40px;
+  width: 700px;
+
+}
+
+.botone{
+    background-color: #92D1FF; 
+    border-radius: 5px ;
+    border: 2px;
+    width: 300px;
+    height: 45px;
+    box-shadow:2px 3px #466f8b;
+    margin-top: 10px;
+    margin-left: 770px;
+    font-family: Mate SC;
+    font-size: larger;
+}
+
+.botone:hover{
+    transform: scale(1.4);
+    transition: all 0.5s;
+}
+
+#encontre{
+  margin-left: 700px;
+ 
+}
+
+.guia{
+  color: #ffffff;
+  font-size: 60px;
+  text-align: center;
+  margin-top: 40px;
+  font-style: oblique;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+
+}
+
+header{
+  position: fixed;
+  top:0;
+  background-color: #ffffff;
+  z-index: 1;
+  width: 100%;
+    height: 10%;
+    
+}
+
+.unidades{
+  height:550px;
+  width: 100%;
+  padding: 0px;
+	margin-bottom: 0px;
+  display: flex;
+  align-items: center;
+  background-color: #2079b000;
+
+}
+
+.titulouni{
+  color: #2079B0;
+  font-size: 60px;
+  text-align: center;
+  margin-top: 60px;
+  font-style: oblique;
+  font-family:Mate SC;
+  background-color: #2079b000;
+
+}
+.card{
+  width: 450px;
+  height: 500px;
+  background-color: #2079B0;
+  border-radius: 15px;
+  margin-left: 70px;
+  margin-top: -0%;
+}
+.card2{
+  width: 450px;
+  height: 500px;
+  background-color: #2079B0;
+  border-radius: 15px;
+  margin-left: 300px;
+  margin-top: 0%;
+  
+}
+
+#uni1{
+  height: 300px;
+  width: 445px;
+  border-radius: 15px;
+  margin-left: 1px;
+}
+
+#uni2{
+  height: 300px;
+  width: 445px;
+  border-radius: 15px;
+  margin-left: 1px;
+}
+#tituni{
+  color: #ffffff;
+  font-size: 32px;
+  text-align: center;
+  margin-top: 0px;
+  font-style: oblique;
+  font-family:Mate SC;
+}
+#textuni{
+  color: #ffffff;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 9px;
+  font-style: oblique;
+  font-family:Verdana;
+}
+
+#decouni2{
+  margin-top: 320px;
+  width: 250px;
+  margin-left: 90px;
+}
+
+#decouni1{
+  margin-bottom: 470px;
+  width: 250px;
+}
+.butuni{
+border-radius: 20px ;
+border: 2px;
+width: 200px;
+height: 50px;
+box-shadow:5px 5px #4b93ca;
+margin-top: 10px;
+margin-left: 125px;
+font-family: Verdana;
+font-size: 22px;
+background-color: #92D1FF;
+color:#ffffff;
+
+
+}
+
+
+.butuni:hover{
+  background-color: #B5DDFC;
+  box-shadow: #171d20;
+
+
+}
+
+#coracao{
+  margin-top: 0px;
+  height: 500px;
+  margin-left: 30px;
+}
+.deco{
+  background-color: #ffffff;
+  height: 600px;
+}
+#decora{
+ margin-left: 20px;
+margin-top: 0px;
+width: 68%;
+height: 400px;
+}
+#pla1{
+  width: 275px;
+  height: 199px;
+  margin-bottom: 300px;
+  margin-left: 100px;
+}
+#pla2{
+  width: 275px;
+  height: 190px;
+  margin-bottom: 100px;
+  margin-left: -280px;
+
+}
+#pla3{
+  width: 275px;
+  height: 180px;
+  margin-bottom: -90px;
+  margin-left: -280px;
+}
+#pla1:hover{
+  transform: scale(1.1);
+    transition: all 0.5s;
+
+}
+#pla2:hover{
+  transform: scale(1.2);
+    transition: all 0.5s;
+
+}
+#pla3:hover{
+  transform: scale(1.3);
+    transition: all 0.5s;
+ 
+}
+
+#baixee{
+  color: #ffffff;
+  margin-left: 1440px;
+  margin-top: -450px;
+}
+#baixee:hover{
+  color: #92D1FF;
+ 
+}
+
+#baixe1{
+  margin-left: 1330px;
+  margin-top: 20px;
+  border-radius: 10px;
+  width: 230px;
+
+}
+#baixe2{
+  border-radius: 10px;
+  width: 230px;
+}
+
+#baixe1:hover{
+  transform: scale(1.1);
+  transition: all 0.5s;
+}
+#baixe2:hover{
+  transform: scale(1.1);
+  transition: all 0.5s;
+}
+
+.blur img
+{
+        transition: 1s ease;
+}
+.blur img:hover 
+{
+        -xpedu-filter: blur(5px);
+        transition: 1s ease;
+}
+
+ body{
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .box {
+       
+    }
+    fieldset {
+        border: 3px solid #ffffff;
+        margin-left: 10px;
+    }
+
+    #logo {
+        width: 390px;
+        height: 150px;
+    }
+
+    
+    
+#text{
+    margin-bottom: 20px;
+    font-size: 23px;
+    margin-left: 33px;
+}
+
+#medico{
+    margin-left: 42px;
+}
+
+
+    #medit{
+        font-size: 18px;
+        
+    }
+    
+    #pacit{
+        font-size: 18px;
+    }
+    #paciente{
+        margin-left: 70px;
+    }
+    .opcoe{
+        margin-top: -40px;
+    }
+    
+    
+    
+    /* Estilos para a sub-tela */
+    .sub-tela {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #2079b0(0, 0, 0, 0.5);
+        /* Fundo semi-transparente */
+        z-index: 9999;
+        /* Nível de sobreposição para aparecer acima do conteúdo principal */
+        display: none;
+        /* Inicialmente oculta */
+    }
+
+    .sub-tela-conteudo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 30px;
+        width: 600px;
+        max-width: 90%;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px #2079b0(0, 0, 0, 0.3);
+        text-align: center;
+        background-color: #7BC8FF;
+        border: 4px solid #2079b0;
+
+    }
+
+    .sub-tela-titulo {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .sub-tela-pergunta {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    .sub-tela-opcoes {
+        display: flex;
+        justify-content: center;
+        background-color: #E7E7E7;
+        padding: 10px;
+        border-radius: 4px;
+    }
+
+    .sub-tela-opcoes label {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        margin: 0 10px;
+    }
+
+
+
+    .sub-tela-botoes {
+        display: flex;
+        justify-content: flex-end;
+    }
+    
+</style>
+
+
+    <!-- Corpo -->
+    <main>
+
+
+    
+    
+    
+<!--carrossel-->
+<div class="slider"> 
+
+    <div class="slides">
+
+        <input type="radio" name="radio-btn" id="radio1">
+        <input type="radio" name="radio-btn" id="radio2">
+        <input type="radio" name="radio-btn" id="radio3">
+        <input type="radio" name="radio-btn" id="radio4">
+
+        <div class="slide first">
+           <a href="#planos"> <img src="images/homesel1.png" alt="Imagem 1" ></a>
+        </div>
+        <div class="slide">
+            <img src="images/homesel2.png" alt="Imagem 2">
+        </div>
+        <div class="slide">
+            <img src="images/homesel3.png" alt="Imagem 3">
+        </div>
+        <div class="slide">
+            <img src="images/homesel4.png" alt="Imagem 4">
+        </div>
+
+        <div class="navigation-auto">
+            <div class="auto-btn1"></div>
+            <div class="auto-btn2"></div>
+            <div class="auto-btn3"></div>
+            <div class="auto-btn4"></div>
+        </div>
+
+    </div>
+
+    <div class="manual-navigation">
+        <label for="radio1" class="manual-btn"></label>
+        <label for="radio2" class="manual-btn"></label>
+        <label for="radio3" class="manual-btn"></label>
+        <label for="radio4" class="manual-btn"></label>
+    </div>
+
+</div>
+
+       <img src="images/bemvindo.png" id="bemvindo">
+       <img src="images/encontre.png" id="encontre">
+       <a href="/especialidades.html"><button class="botone">Especialidades</button></a>
+        </main>
+        <br><br>
+      <!--meio-->
+      <br>
+              <div class="meio">
+    <p class="guia">Guia MED+</p>
+    <a href="/"><img src="images/exp1.png" id="exp1"></a>
+    <a href="/Consultas2.html"><img src="images/exp2.png" id="exp2"></a>
+    <a href="/opcoeslog.html"><img src="images/exp3.png" id="exp3"></a>
+    <a href="#unidades"><img src="images/exp4.png" id="exp4"></a>
+</div>
+            <br><br><br>
+            <p class="titulouni" id="unidades">UNIDADES</p>
+            <div class="unidades" >
+                <img src="images/decouni1.png" id="decouni1">
+                
+                <div class="card">
+                    <img src="images/uni1.png" id="uni1">
+                    <h1 id="tituni">Unidade Nova Odessa</h1>
+                    <p id="textuni">R. dos Jacarandás, 100 - Jardim das Palmeiras, Nova Odessa - SP</p>
+                    <a href="/Consultas2.html"><button class="butuni">AGENDE</button></a>
+
+                </div>
+                <div class="card2">
+                    <img src="images/uni2.png" id="uni2">
+                    <h1 id="tituni">Unidade Sumaré</h1>
+                    <p id="textuni">Av. Rebouças, 3965 - Jardim São Carlos, Sumaré - SP</p>
+                    <a href="/Consultas2.html"><button class="butuni">AGENDE</button></a>
+                </div>
+                <img src="images/decouni2.png" id="decouni2">
+            </div>
+<br><br><br>
+<div class="blur">
+            <div class="deco" id="planos">
+                <img src="images/melhores.png" id="decora">
+                <img src="images/med+1.png" id="pla1">
+                <img src="images/med+2.png" id="pla2">
+                <img src="images/med+3.png" id="pla3">
+
+            </div>
+        </div>
+            <footer>
+                <div class="final">
+                
+                    <h1 id="finale">Central de Atendimentos MED+</h1>
+                    <h2 id="finale2">(19)99378-4877 - Sumaré</h2>
+                    <h2 id="finale2">(19)99439-2278 - Nova Odessa</h2>
+                    
+                    <h2 id="direitos">© 2023 Clínica MED+. Todos os Direitos Reservados.</h2>
+                    <div class="redesocial">
+                    <h1 id="siga">Siga nossas redes sociais</h1>
+                    <h2 id="redes">Instagram</h2>
+                    <h2 id="redes">Facebook</h2>
+                </div>
+                <h1 id="baixee">Baixe nosso aplicativo</h1>
+                <img src="images/baixe.png" id="baixe1">
+                <img src="images/baixe2.png" id="baixe2">
+                </div>
+            </footer>
+                 
+      
+</body>
+
+</html>

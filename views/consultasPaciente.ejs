@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Consultas-MedPlus</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<style>
+
+/* Add these styles to your existing CSS file */
+.consultation-table {
+	width: 80%;
+	margin: 20px auto;
+	border-collapse: collapse;
+  }
+  
+  .consultation-table th, .consultation-table td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+  }
+  
+  .consultation-table th {
+	background-color: #2079b0;
+	color: white;
+  }
+  
+  /* Adicione essas regras ao seu arquivo CSS existente */
+.consultation-table {
+	width: 80%;
+	margin: 20px auto;
+	border-collapse: separate; /* Adiciona espaçamento entre células e linhas */
+	border-spacing: 10px; /* Define o espaçamento desejado */
+	margin-right: 210px;
+  }
+  
+  .consultation-table th,
+  .consultation-table td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+  }
+  
+  .consultation-table th {
+	background-color: #2079b0;
+	color: white;
+	
+  }
+  /* Header */
+
+   #botlogo{
+      margin-right: 12%;
+      margin-top: 20px;
+
+    }
+
+      .botop{
+        background-color: #93D1FF;
+        border-radius: 40px;
+        border-color: #ffffff;
+        height: 50px;
+        width: 170px;
+        font-family: Mate SC;
+        font-size: 18px;
+        margin-bottom: 10%;
+        margin-top: 10px; 
+    }
+    
+    .linha{
+     margin-left: 690px;
+     margin-top: 100px;
+    }
+    
+   
+    .botop:hover{
+      background-color: #93D1FF;
+      box-shadow: 5px 2px #4b93ca;
+      transform: scale(1.1);
+      transition: all 0.5s;
+  }
+  
+  #foto2 {
+	margin-left: 48%;
+}
+
+  #foto2:hover{
+    
+      transform: scale(1.1);
+      transition: all 0.5s;
+  }
+
+
+
+.foto {
+	padding: 0px;
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+
+.topico {
+	padding: 0px;
+	margin-bottom: 0px;
+        display: flex;
+        align-items: center;
+}
+
+
+   .logincerto{
+    align-content: center;
+   }
+   
+ 
+    .botao{
+        width: 600px;
+        justify-content: space-between;
+        padding: 15px;
+        padding-left: 10px;
+        align-items: center;
+
+    }
+    header{
+  position: fixed;
+  top:0;
+  background-color: #ffffff;
+  z-index: 1;
+  width: 100%;
+    height: 10%;
+    
+
+
+}
+/* Fim Header */
+  
+</style>
+<body>
+
+ <header>
+        
+            <div class="topico">
+                <img src="images/logoespee.png" height="40%" width="300px" button id="botlogo" onclick="voltar()">
+                
+        
+<a href="/homeMedico"><button class="botop">Home</button></a>
+<a href="/exames.html"><button class="botop">Exames</button></a>
+<img src="images/logout.png" height="80px" width="80px" id="foto2" button id="botlogi" onclick="login()">
+</div>
+</header>
+
+  
+  <br>
+   <br>
+    <br>
+     <br>
+      <br>
+       <br>
+<% 
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = new Date(dateString).toLocaleDateString('pt-BR', options);
+    return formattedDate;
+  };
+%>
+  <!-- Table for Consultations -->
+<form action="/confirmarConsulta" method="post">
+  <table class="consultation-table">
+    <thead>
+      <tr>
+        <th>Paciente</th>
+        <th>Especialidade</th>
+        <th>Data</th>
+        <th>Horário</th>
+        <th>Comentários</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <% dadosConsultas.forEach(function(row) { %>
+        <tr>
+          <td><%= row.nomepaciente %></td>
+          <td><%= row.especialidade %></td>
+          <td><%= formatDate(row.dataconsulta) %></td>
+          <td><%= row.hora %></td>
+          <td><%= row.comentario %></td>
+          
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</form>
+
+
+  <!-- End of Consultation Table -->
+
+  <div class="e515_60"></div>
+  <div class="e515_62"></div>
+  <div class="e515_70"></div>
+  <div class="e515_77"></div>
+  <div class="e515_79"></div>
+  <div class="e515_87"></div>
+  </div>
+  
+  
+  <script>
+       function voltar(){event.preventDefault();
+    window.location.href="/";
+
+  }
+
+
+  function login(){event.preventDefault();
+    window.location.href="/login";
+
+  }
+  </script>
+</body>
+
+</html>
+
+
