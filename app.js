@@ -16,7 +16,7 @@ const app = express();
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'phpmyadmin',
-  password: '383234',
+  password: 'isabila',
   database: 'medical',
 });
 
