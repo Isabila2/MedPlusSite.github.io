@@ -31,34 +31,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-// Configurar a estratégia de autenticação local
-passport.use(new LocalStrategy(
-  async (username, password, done) => {
-    try {
-      console.log('Tentando autenticar usuário:', username);
-      const [rows] = await db.promise().query('SELECT * FROM user WHERE username = ?', [username]);
-      const user = rows[0];
 
-      if (!user) {
-        console.log('Usuário não encontrado:', username);
-        return done(null, false, { message: 'Usuário não encontrado.' });
-      }
-
-      // Verificar a senha usando bcrypt
-      const isPasswordValid = await bcrypt.compare(password, user.password);
-      
-      if (!isPasswordValid) {
-        console.log('Senha incorreta para o usuário:', username);
-        return done(null, false, { message: 'Senha incorreta.' });
-      }
-      console.log('Usuário autenticado com sucesso:', username);
-      return done(null, user);
-    } catch (err) {
-      console.error('Erro durante a autenticação:', err);
-      return done(err);
-    }
-  }
-));
 
 app.get('/agendar', (req, res) => {
   if (req.session.loggedin) {
