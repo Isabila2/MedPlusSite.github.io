@@ -1,0 +1,25 @@
+.consultation-table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+.consultation-table th,
+.consultation-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.consultation-table th {
+    background-color: #2079b0;
+    color: white;
+}
+
+/* Adicione essas regras ao seu arquivo CSS existente */
+.consultation-table {
+    border-collapse: separate; /* Adiciona espaçamento entre células e linhas */
+    border-spacing: 10px; /* Define o espaçamento desejado */
+    margin-right: 210px;
+}
+
